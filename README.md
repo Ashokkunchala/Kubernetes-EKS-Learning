@@ -188,3 +188,13 @@
 
 *EKS Learning Journey — built for consistent, hands-on, production-focused progress.*
 *Last updated: September 2026*
+
+## 🧭 Practical Engineering Layer
+
+Use these alongside the 60-day curriculum:
+
+- [Production Engineering Guide](EKS_PRODUCTION_ENGINEERING_GUIDE.md) — production ownership, identity, add-ons, networking, observability, scaling, upgrades, DR, and incidents.
+- [30-Day Practical Calendar](EKS_30_DAY_PRACTICAL_CALENDAR.md) — execution-focused drills.
+- [EKS Operations Runbooks](OPERATIONS_RUNBOOKS.md) — timed failure scenarios and evidence-first troubleshooting.
+
+**Completion rule:** RUN → OBSERVE → BREAK → RECOVER → EXPLAIN.
