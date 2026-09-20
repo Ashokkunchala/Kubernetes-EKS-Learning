@@ -1,0 +1,24 @@
+# grafana-dashboard-provider.yaml
+# Purpose: Grafana dashboard provider so dashboards dropped into /var/lib/grafana/dashboards are auto-loaded.
+# Maps to: Day-42 (Grafana Dashboards), Day-45 (Monitoring Stack Practice)
+# Apply: kubectl apply -f grafana-dashboard-provider.yaml (mounted into Grafana's provisioning/dashboards folder)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-provider
+  namespace: monitoring
+  labels:
+    grafana_dashboard_provider: "1"
+data:
+  dashboards.yaml: |
+    apiVersion: 1
+    providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        allowUiUpdates: false
+        updateIntervalSeconds: 30
+        options:
+          path: /var/lib/grafana/dashboards

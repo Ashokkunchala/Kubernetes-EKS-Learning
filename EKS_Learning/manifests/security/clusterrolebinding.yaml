@@ -1,0 +1,16 @@
+# clusterrolebinding.yaml
+# Purpose: Binds the cluster-readonly ClusterRole to app-sa, granting cluster-wide read-only access.
+# Maps to: Day-11 (EKS IAM Roles & Policies), Day-15 (EKS Security Best Practices), Day-28 (Pod Level IAM)
+# Apply: kubectl apply -f clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-readonly-binding
+subjects:
+  - kind: ServiceAccount
+    name: app-sa
+    namespace: secure-app
+roleRef:
+  kind: ClusterRole
+  name: cluster-readonly
+  apiGroup: rbac.authorization.k8s.io

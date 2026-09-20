@@ -1,0 +1,23 @@
+# ============================================================
+# istio-gateway.yaml
+# Istio Gateway listening on port 80 for all hosts.
+# Requires Istio to be installed, then label the namespace with
+# "istio-injection=enabled" for sidecar injection.
+# Maps to: Day-18 (Service Mesh with Istio)
+# Apply:   kubectl apply -f istio-gateway.yaml
+# ============================================================
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: demo-gateway
+  namespace: demo
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"

@@ -1,0 +1,19 @@
+# awsnodetemplate.yaml
+# Purpose: AWSNodeTemplate defining the subnets, security groups and EC2 tag propagation Karpenter uses when launching nodes.
+# Maps to: Day-51 (Spot Instances EKS), Day-53 (Cluster Autoscaler vs Karpenter), Day-54 (Cost Optimization Practice)
+# Apply: kubectl apply -f awsnodetemplate.yaml (selectors match tags configured on your cluster subnets/SGs)
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: default
+spec:
+  subnetSelector:
+    karpenter.sh/discovery: my-cluster
+  securityGroupSelector:
+    karpenter.sh/discovery: my-cluster
+  tags:
+    karpenter.sh/discovery: my-cluster
+    Name: karpenter-node
+  userData: |
+    #!/bin/bash
+    echo "Karpenter node bootstrapped" > /etc/motd

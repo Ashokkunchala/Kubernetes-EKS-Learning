@@ -1,0 +1,35 @@
+# karpenter-provisioner.yaml
+# Purpose: Karpenter Provisioner mixing spot + on-demand capacity, constrained instance families/sizes, a resource limit and consolidation.
+# Maps to: Day-51 (Spot Instances EKS), Day-52 (Right-Sizing Nodes), Day-53 (Cluster Autoscaler vs Karpenter), Day-54 (Cost Optimization Practice)
+# Apply: kubectl apply -f karpenter-provisioner.yaml (requires Karpenter v0.x installed, CRD karpenter.sh/v1alpha5)
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  requirements:
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: ["spot", "on-demand"]
+    - key: karpenter.sh/provisioner-name
+      operator: In
+      values: ["default"]
+    - key: kubernetes.io/arch
+      operator: In
+      values: ["amd64"]
+    - key: node.kubernetes.io/instance-type
+      operator: In
+      values: ["m5.large", "m5.xlarge", "m5.2xlarge", "c5.large", "c5.xlarge"]
+  providerRef:
+    name: default
+  nodeTaints:
+    - key: workload
+      value: critical
+      effect: NoSchedule
+  limits:
+    resources:
+      cpu: "100"
+      memory: 400Gi
+  consolidation:
+    enabled: true
+  ttlSecondsAfterEmpty: 300

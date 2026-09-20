@@ -1,0 +1,22 @@
+# ============================================================
+# 04-service.yaml
+# ClusterIP service exposing the demo app on port 80.
+# Maps to: Day-03 (Services and Networking)
+# Apply:   kubectl apply -f 04-service.yaml
+# ============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app
+  namespace: demo
+  labels:
+    app: demo
+spec:
+  selector:
+    app: demo
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP

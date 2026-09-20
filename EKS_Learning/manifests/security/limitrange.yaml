@@ -1,0 +1,27 @@
+# limitrange.yaml
+# Purpose: Default (and min/max) CPU/memory requests & limits per container so pods without explicit resources get sane defaults.
+# Maps to: Day-04 (Namespaces), Day-15 (EKS Security Best Practices), Day-52 (Right-Sizing Nodes)
+# Apply: kubectl apply -f limitrange.yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: secure-app-limitrange
+  namespace: secure-app
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 512Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 128Mi
+      max:
+        cpu: "2"
+        memory: 2Gi
+      min:
+        cpu: 20m
+        memory: 32Mi
+      maxLimitRequestRatio:
+        cpu: "2"
+        memory: "2"

@@ -1,0 +1,14 @@
+# velero-restore.yaml
+# Purpose: Restores the ecommerce namespace from a named backup. Update backupName with the actual backup name (e.g. manual-backup or a schedule-created name).
+# Maps to: Day-56 (Cluster Backup Strategies), Day-57 (Cross Region Replication), Day-59 (Disaster Recovery Practice)
+# Apply: kubectl apply -f velero-restore.yaml
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: restore-ecommerce
+  namespace: velero
+spec:
+  backupName: BACKUP_NAME_PLACEHOLDER
+  includedNamespaces:
+    - ecommerce
+  restorePVs: true

@@ -1,0 +1,43 @@
+# RBAC — read-only Role bound to an ops ServiceAccount (Day-11, Day-15)
+# Principle of least privilege: operators can inspect, never mutate.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ops-reader
+  namespace: ecommerce
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ops-readonly
+  namespace: ecommerce
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log", "pods/exec", "services", "configmaps", "secrets", "endpoints", "events", "persistentvolumeclaims"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "statefulsets", "replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["autoscaling"]
+  resources: ["horizontalpodautoscalers"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses", "networkpolicies"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["policy"]
+  resources: ["poddisruptionbudgets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ops-readonly-binding
+  namespace: ecommerce
+subjects:
+- kind: ServiceAccount
+  name: ops-reader
+  namespace: ecommerce
+roleRef:
+  kind: Role
+  name: ops-readonly
+  apiGroup: rbac.authorization.k8s.io

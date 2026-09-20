@@ -1,0 +1,17 @@
+# rolebinding.yaml
+# Purpose: Binds the app-reader Role to the app-sa ServiceAccount within the secure-app namespace.
+# Maps to: Day-11 (EKS IAM Roles & Policies), Day-15 (EKS Security Best Practices), Day-28 (Pod Level IAM)
+# Apply: kubectl apply -f rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-reader-binding
+  namespace: secure-app
+subjects:
+  - kind: ServiceAccount
+    name: app-sa
+    namespace: secure-app
+roleRef:
+  kind: Role
+  name: app-reader
+  apiGroup: rbac.authorization.k8s.io

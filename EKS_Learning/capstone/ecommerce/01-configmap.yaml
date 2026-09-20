@@ -1,0 +1,11 @@
+# app-config ConfigMap — shared runtime config for all ecommerce services (Day-04, Day-06)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: ecommerce
+data:
+  REDIS_URL: "redis://redis-cache.ecommerce.svc.cluster.local:6379/0"
+  DB_HOST: "postgres.ecommerce.svc.cluster.local"
+  DB_PORT: "5432"
+  LOG_LEVEL: "info"

@@ -1,0 +1,26 @@
+# ============================================================
+# istio-virtual-service.yaml
+# Routes / traffic from the gateway to the demo-app service,
+# targeting the "v1" subset defined in the DestinationRule.
+# Maps to: Day-18 (Service Mesh with Istio)
+# Apply:   kubectl apply -f istio-virtual-service.yaml
+# ============================================================
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: demo-virtual-service
+  namespace: demo
+spec:
+  hosts:
+    - "demo.example.com"
+  gateways:
+    - demo-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: demo-app
+            subset: v1
+          weight: 100

@@ -1,0 +1,24 @@
+# ============================================================
+# efs-pvc.yaml
+# EFS PVC (ReadWriteMany) shared by multiple pods/nodes.
+# NOTE: The EFS CSI driver must be installed and an `efs-sc`
+#       StorageClass created (see Day-21) before applying.
+# Maps to: Day-21 (EFS CSI Driver)
+# Apply:   kubectl apply -f efs-pvc.yaml
+# ============================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-demo-pvc
+  namespace: demo
+  annotations:
+    # Create the EFS file system first and put its ID here.
+    # efs.csi.aws.com/subnetProvision: ...   (optional alternative)
+    volume.beta.kubernetes.io/storage-class: efs-sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-sc
+  resources:
+    requests:
+      storage: 5Gi

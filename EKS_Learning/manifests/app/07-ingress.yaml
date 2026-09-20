@@ -1,0 +1,36 @@
+# ============================================================
+# 07-ingress.yaml
+# ALB Ingress exposing the demo app to the internet on AWS EKS.
+# Requires the AWS Load Balancer Controller to be installed.
+# Replace the placeholder host with your own domain on AWS.
+# Maps to: Day-13 (EKS Load Balancing with ALB)
+# Apply:   kubectl apply -f 07-ingress.yaml
+# ============================================================
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-app
+  namespace: demo
+  annotations:
+    # ALB ingress class + annotations for the AWS Load Balancer Controller.
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/success-codes: "200"
+    # Replace REGION and ACCOUNT_ID with your own values.
+    alb.ingress.kubernetes.io/subnets: subnet-xxxxxxxxxxx,subnet-yyyyyyyyyyy
+spec:
+  ingressClassName: alb
+  rules:
+    - host: "demo.example.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-app
+                port:
+                  number: 80

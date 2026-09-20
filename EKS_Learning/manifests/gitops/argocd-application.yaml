@@ -1,0 +1,34 @@
+# argocd-application.yaml
+# Purpose: ArgoCD Application that syncs a git repo's manifests into the production namespace with automated prune + self-heal.
+# Maps to: Day-31 (GitOps ArgoCD Intro), Day-33 (ArgoCD Application Patterns), Day-34 (ArgoCD Sync & Rollback)
+# Apply: kubectl apply -f argocd-application.yaml (requires ArgoCD installed in the argocd namespace)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: my-project
+  source:
+    repoURL: https://github.com/your-org/your-app.git
+    targetRevision: HEAD
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

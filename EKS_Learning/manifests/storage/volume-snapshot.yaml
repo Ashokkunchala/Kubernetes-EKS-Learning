@@ -1,0 +1,16 @@
+# ============================================================
+# volume-snapshot.yaml
+# VolumeSnapshot of the ebs-demo-pvc, using the csi-aws-vsc class.
+# Creates a point-in-time backup of the underlying EBS volume.
+# Maps to: Day-23 (Volume Snapshots, Restore & Backups)
+# Apply:   kubectl apply -f volume-snapshot.yaml
+# ============================================================
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: ebs-demo-snapshot
+  namespace: demo
+spec:
+  volumeSnapshotClassName: csi-aws-vsc
+  source:
+    persistentVolumeClaimName: ebs-demo-pvc

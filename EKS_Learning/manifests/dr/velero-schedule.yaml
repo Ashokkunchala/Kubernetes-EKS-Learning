@@ -1,0 +1,18 @@
+# velero-schedule.yaml
+# Purpose: Velero Schedule running a daily backup (02:00 UTC) of the ecommerce namespace with a 7-day TTL.
+# Maps to: Day-56 (Cluster Backup Strategies), Day-59 (Disaster Recovery Practice)
+# Apply: kubectl apply -f velero-schedule.yaml (after installing Velero with an S3 bucket location)
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-backup
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"
+  template:
+    includedNamespaces:
+      - ecommerce
+    ttl: 168h
+    storageLocation: default
+    volumeSnapshotLocations:
+      - default

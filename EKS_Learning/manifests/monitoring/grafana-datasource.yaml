@@ -1,0 +1,23 @@
+# grafana-datasource.yaml
+# Purpose: Grafana provisioning of the Prometheus data source pointing at the Prometheus Operator service.
+# Maps to: Day-42 (Grafana Dashboards), Day-41 (Prometheus Operator), Day-45 (Monitoring Stack Practice)
+# Apply: kubectl apply -f grafana-datasource.yaml (mounted into Grafana's provisioning/datasources folder)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: monitoring
+  labels:
+    grafana_datasource: "1"
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus-operated.monitoring.svc:9090
+        isDefault: true
+        editable: false
+        jsonData:
+          timeInterval: 30s

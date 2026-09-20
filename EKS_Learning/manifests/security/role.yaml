@@ -1,0 +1,13 @@
+# role.yaml
+# Purpose: Namespaced Role giving read-only (get/list/watch) access to pods and configmaps inside the secure-app namespace only.
+# Maps to: Day-11 (EKS IAM Roles & Policies), Day-15 (EKS Security Best Practices), Day-28 (Pod Level IAM)
+# Apply: kubectl apply -f role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: app-reader
+  namespace: secure-app
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "configmaps"]
+    verbs: ["get", "list", "watch"]

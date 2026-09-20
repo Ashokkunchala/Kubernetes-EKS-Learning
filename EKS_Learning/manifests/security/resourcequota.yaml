@@ -1,0 +1,20 @@
+# resourcequota.yaml
+# Purpose: Hard CPU/memory and object-count quotas so no single team/workload can exhaust the secure-app namespace.
+# Maps to: Day-04 (Namespaces), Day-15 (EKS Security Best Practices), Day-54 (Cost Optimization Practice)
+# Apply: kubectl apply -f resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: secure-app-quota
+  namespace: secure-app
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+    pods: "20"
+    count/configmaps: "30"
+    count/secrets: "30"
+    count/services: "10"
+    persistentvolumeclaims: "5"

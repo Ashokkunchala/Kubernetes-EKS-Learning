@@ -1,0 +1,13 @@
+# ============================================================
+# 00-namespace.yaml
+# Demo application namespace: `demo`
+# Maps to: Day-04 (Namespaces, ConfigMaps, Secrets)
+# Apply:   kubectl apply -f 00-namespace.yaml
+# ============================================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+  labels:
+    app: demo
+    environment: learning

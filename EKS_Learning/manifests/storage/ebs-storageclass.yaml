@@ -1,0 +1,21 @@
+# ============================================================
+# ebs-storageclass.yaml
+# gp3 EBS storage class provisioned by the EBS CSI driver.
+# WaitForFirstConsumer so volumes are created on the AZ where
+# the consuming pod is scheduled.
+# Maps to: Day-12 (EKS Storage with EBS)
+# Apply:   kubectl apply -f ebs-storageclass.yaml
+# ============================================================
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-gp3
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+parameters:
+  type: gp3
+  fsType: ext4
+  encrypted: "true"
+  # Optional: restrict to a set of AZs (replace with your region).
+  # allowedTopologies: ...  (not used here)

@@ -1,0 +1,24 @@
+# ============================================================
+# istio-destination-rule.yaml
+# Defines v1 and v2 subsets of the demo-app service with a
+# consistent-hash based traffic policy (loadBalancer round robin).
+# Maps to: Day-18 (Service Mesh with Istio)
+# Apply:   kubectl apply -f istio-destination-rule.yaml
+# ============================================================
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: demo-destination-rule
+  namespace: demo
+spec:
+  host: demo-app
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+    - name: v2
+      labels:
+        version: v2

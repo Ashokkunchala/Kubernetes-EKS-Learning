@@ -1,0 +1,19 @@
+# argocd-project.yaml
+# Purpose: ArgoCD AppProject with default source/destination allow rules, scoping Applications to the allowed git repos and clusters.
+# Maps to: Day-31 (GitOps ArgoCD Intro), Day-32 (ArgoCD Installation & Config), Day-35 (ArgoCD Advanced Best Practices)
+# Apply: kubectl apply -f argocd-project.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-project
+  namespace: argocd
+spec:
+  description: Default project for the EKS learning lab applications
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

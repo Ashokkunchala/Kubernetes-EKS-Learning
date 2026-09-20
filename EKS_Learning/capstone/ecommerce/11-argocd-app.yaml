@@ -1,0 +1,22 @@
+# ArgoCD Application — GitOps source of truth for the ecommerce namespace (Day-31..35)
+# Point repoURL at your fork. ArgoCD installs into the argocd namespace (Day-32).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ecommerce
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/ecommerce-app.git
+    targetRevision: HEAD
+    path: ecommerce/
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ecommerce
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

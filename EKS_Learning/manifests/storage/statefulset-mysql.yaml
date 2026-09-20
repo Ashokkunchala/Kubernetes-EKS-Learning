@@ -1,0 +1,57 @@
+# ============================================================
+# statefulset-mysql.yaml
+# MySQL StatefulSet mounting the EBS PVC and a volumeClaimTemplate
+# placeholder. serviceName + selector give stable network identity.
+# NOTE: The pod uses the ebs-demo-pvc for /var/lib/mysql; the
+#       volumeClaimTemplate is included as an example pattern for
+#       per-sts-replica volumes.
+# Maps to: Day-05 (Persistent Storage), Day-12 (EKS Storage EBS)
+# Apply:   kubectl apply -f statefulset-mysql.yaml
+# ============================================================
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: demo
+spec:
+  serviceName: mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+              name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: ebs-demo-pvc
+  # Example template for per-replica volumes. Uncomment to let each
+  # replica get its own dynamically provisioned EBS volume.
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: ebs-gp3
+        resources:
+          requests:
+            storage: 10Gi

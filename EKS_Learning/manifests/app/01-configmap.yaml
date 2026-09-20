@@ -1,0 +1,18 @@
+# ============================================================
+# 01-configmap.yaml
+# App configuration injected via envFrom into the deployment.
+# Maps to: Day-04 (Namespaces, ConfigMaps, Secrets)
+#          Day-06 (ConfigMaps and Secrets Practice)
+# Apply:   kubectl apply -f 01-configmap.yaml
+# ============================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: demo
+data:
+  GREETING: "Welcome to the EKS Learning demo!"
+  PRIMARY_COLOR: "#3178c6"
+  SECONDARY_COLOR: "#ff6b35"
+  LOG_LEVEL: "info"
+  PORT: "80"

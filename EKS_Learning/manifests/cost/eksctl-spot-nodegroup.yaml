@@ -1,0 +1,29 @@
+# eksctl-spot-nodegroup.yaml
+# Purpose: eksctl ClusterConfig partial defining a fully spot (100% spot) managed node group with a taint and scaling bounds.
+# Maps to: Day-09 (EKS Cluster Setup with eksctl), Day-51 (Spot Instances EKS), Day-52 (Right-Sizing Nodes)
+# Apply: eksctl create nodegroup -f eksctl-spot-nodegroup.yaml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: my-cluster
+  region: us-east-1
+nodeGroups:
+  - name: spot-workers
+    instanceType: m5.large
+    spot: true
+    instancesDistribution:
+      instanceTypes: [m5.large, m5.xlarge, c5.large]
+      onDemandBaseCapacity: 0
+      onDemandPercentageAboveBaseCapacity: 0
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 10
+    labels:
+      lifecycle: Ec2Spot
+      role: workers
+    taints:
+      - key: spot
+        value: "true"
+        effect: NoSchedule
+    tags:
+      karpenter.sh/managed: "false"

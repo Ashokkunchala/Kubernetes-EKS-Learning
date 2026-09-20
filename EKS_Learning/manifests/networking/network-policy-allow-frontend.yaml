@@ -1,0 +1,26 @@
+# ============================================================
+# network-policy-allow-frontend.yaml
+# Allows ingress to pods labeled app=demo from any pod labeled
+# app=client on port 80 only. Pairs with the default-deny policy.
+# Maps to: Day-17 (Network Policies with Calico)
+# Apply:   kubectl apply -f network-policy-allow-frontend.yaml
+# ============================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-from-client
+  namespace: demo
+spec:
+  podSelector:
+    matchLabels:
+      app: demo
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: client
+      ports:
+        - protocol: TCP
+          port: 80

@@ -1,0 +1,59 @@
+# Monitoring stack wiring (Day-41, Day-42, Day-44)
+# ServiceMonitor + PrometheusRule require Prometheus Operator (kube-prometheus-stack).
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: product-service-monitor
+  namespace: ecommerce
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: product
+  namespaceSelector:
+    matchNames:
+    - ecommerce
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+---
+# high-cpu alert — fires when any ecommerce pod burns > 0.8 CPU core for 5 minutes
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ecommerce-alerts
+  namespace: ecommerce
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+  - name: ecommerce.rules
+    rules:
+    - alert: HighCpuUsage
+      expr: rate(container_cpu_usage_seconds_total{namespace="ecommerce"}[5m]) > 0.8
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High CPU on ecommerce pod {{ $labels.pod }}"
+        description: "Pod {{ $labels.pod }} in namespace ecommerce is using more than 0.8 CPU for 5 minutes."
+---
+# Grafana datasource — auto-discovered via the grafana_datasource label (Day-42)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasource-prometheus
+  namespace: monitoring
+  labels:
+    grafana_datasource: "1"
+data:
+  prometheus.yaml: |
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-operated.monitoring.svc.cluster.local:9090
+      isDefault: true
+      access: proxy

@@ -1,0 +1,24 @@
+# limitrange.yaml
+# Purpose: Default (and max) resource requests/limits per container so under-provisioned pods get lean defaults in the cost-optimized namespace.
+# Maps to: Day-52 (Right-Sizing Nodes), Day-54 (Cost Optimization Practice)
+# Apply: kubectl apply -f limitrange.yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: ecommerce-limitrange
+  namespace: ecommerce
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 250m
+        memory: 256Mi
+      defaultRequest:
+        cpu: 50m
+        memory: 64Mi
+      max:
+        cpu: "1"
+        memory: 1Gi
+      min:
+        cpu: 10m
+        memory: 16Mi

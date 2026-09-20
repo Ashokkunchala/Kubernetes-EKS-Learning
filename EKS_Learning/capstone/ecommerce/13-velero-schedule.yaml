@@ -1,0 +1,18 @@
+# Velero Schedule — daily backup of the ecommerce namespace (Day-56)
+# Prerequisite: Velero installed in the velero namespace with a backup S3 bucket
+# and a VolumeSnapshotLocation (EBS snapshots) configured.
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: ecommerce-daily-backup
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"
+  template:
+    includedNamespaces:
+    - ecommerce
+    ttl: 72h
+    storageLocation: default
+    volumeSnapshotLocations:
+    - default
+    defaultVolumesToFsBackup: true

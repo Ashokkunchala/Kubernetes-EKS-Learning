@@ -1,0 +1,43 @@
+# network-policy.yaml
+# Purpose: Default-deny all ingress/egress plus allow-specific rules for the secure-app namespace (same-namespace + DNS egress).
+# Maps to: Day-07 (Networking Deep Dive), Day-15 (EKS Security Best Practices), Day-17 (Network Policies with Calico)
+# Apply: kubectl apply -f network-policy.yaml (requires a CNI that enforces policies, e.g. Calico on EKS)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: secure-app
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-same-namespace
+  namespace: secure-app
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector: {}
+  egress:
+    - to:
+        - podSelector: {}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53

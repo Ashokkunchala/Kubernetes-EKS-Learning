@@ -1,0 +1,17 @@
+# ============================================================
+# 06-pdb.yaml
+# PodDisruptionBudget keeping at least 2 pods available during
+# voluntary disruptions (node drains, upgrades).
+# Maps to: Day-05 (Resilience) - foundational concept
+# Apply:   kubectl apply -f 06-pdb.yaml
+# ============================================================
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: demo-app
+  namespace: demo
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: demo

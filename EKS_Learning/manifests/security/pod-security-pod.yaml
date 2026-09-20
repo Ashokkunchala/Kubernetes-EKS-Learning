@@ -1,0 +1,39 @@
+# pod-security-pod.yaml
+# Purpose: A restricted-compliant pod (PSS "restricted"): non-root, no privilege escalation, seccomp RuntimeDefault, read-only root FS.
+# Maps to: Day-02 (Pods), Day-15 (EKS Security Best Practices), Day-28 (Pod Level IAM Permissions)
+# Apply: kubectl apply -f pod-security-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restricted-pod
+  namespace: secure-app
+  labels:
+    app: restricted-pod
+spec:
+  serviceAccountName: app-sa
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: app
+      image: nginxinc/nginx-unprivileged:1.27
+      securityContext:
+        allowPrivilegeEscalation: false
+        privileged: false
+        capabilities:
+          drop: ["ALL"]
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+      ports:
+        - containerPort: 8080
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi

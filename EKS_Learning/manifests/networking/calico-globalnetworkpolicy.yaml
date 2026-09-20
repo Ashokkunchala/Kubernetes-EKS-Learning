@@ -1,0 +1,18 @@
+# ============================================================
+# calico-globalnetworkpolicy.yaml
+# Cluster-wide default-deny policy using Calico's
+# GlobalNetworkPolicy (projectcalico.org/v3).
+# Requires the Calico CNI / policy enforcement to be installed.
+# Maps to: Day-17 (Network Policies with Calico)
+# Apply:   kubectl apply -f calico-globalnetworkpolicy.yaml
+# ============================================================
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: default-deny-all
+spec:
+  order: 100
+  selector: all()
+  types:
+    - Ingress
+    - Egress

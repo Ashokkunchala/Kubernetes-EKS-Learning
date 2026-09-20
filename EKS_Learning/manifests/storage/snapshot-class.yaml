@@ -1,0 +1,17 @@
+# ============================================================
+# snapshot-class.yaml
+# VolumeSnapshotClass backed by the EBS CSI driver. Used to create
+# crash-consistent snapshots of EBS-backed PVCs.
+# Maps to: Day-23 (Volume Snapshots, Restore & Backups)
+# Apply:   kubectl apply -f snapshot-class.yaml
+# ============================================================
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: csi-aws-vsc
+driver: ebs.csi.aws.com
+deletionPolicy: Delete
+parameters:
+  # Daily retention, optional. Delete removes the snapshot on volume
+  # snapshot deletion; change to Retain to keep it.
+  crons: "0 0 * * *"

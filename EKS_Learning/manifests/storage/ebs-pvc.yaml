@@ -1,0 +1,19 @@
+# ============================================================
+# ebs-pvc.yaml
+# PVC requesting 10Gi gp3 EBS storage via the ebs-gp3 class.
+# ReadWriteOnce => single node access.
+# Maps to: Day-12 (EKS Storage with EBS)
+# Apply:   kubectl apply -f ebs-pvc.yaml
+# ============================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-demo-pvc
+  namespace: demo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-gp3
+  resources:
+    requests:
+      storage: 10Gi

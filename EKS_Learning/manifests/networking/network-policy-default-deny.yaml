@@ -1,0 +1,17 @@
+# ============================================================
+# network-policy-default-deny.yaml
+# Default-deny policy: blocks all ingress AND egress traffic
+# to pods in the `demo` namespace unless another policy allows it.
+# Maps to: Day-17 (Network Policies with Calico)
+# Apply:   kubectl apply -f network-policy-default-deny.yaml
+# ============================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: demo
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress

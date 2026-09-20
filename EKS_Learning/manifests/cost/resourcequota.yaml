@@ -1,0 +1,19 @@
+# resourcequota.yaml
+# Purpose: Namespace-level CPU/memory and pod quotas to cap spend and avoid runaway workloads on the cost-optimized namespace.
+# Maps to: Day-04 (Namespaces), Day-52 (Right-Sizing Nodes), Day-54 (Cost Optimization Practice)
+# Apply: kubectl apply -f resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ecommerce-quota
+  namespace: ecommerce
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+    pods: "20"
+    count/deployments.apps: "20"
+    count/services: "10"
+    persistentvolumeclaims: "5"

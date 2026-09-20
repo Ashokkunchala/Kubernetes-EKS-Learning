@@ -1,0 +1,20 @@
+# velero-backup.yaml
+# Purpose: One-off (manual) Velero Backup of the ecommerce and secure-app namespaces, including cluster-scoped resources.
+# Maps to: Day-56 (Cluster Backup Strategies), Day-59 (Disaster Recovery Practice)
+# Apply: velero backup create from spec or use: kubectl apply -f velero-backup.yaml (Velero watches velero.io/v1 Backup objects)
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: manual-backup
+  namespace: velero
+  labels:
+    backup-type: manual
+spec:
+  includedNamespaces:
+    - ecommerce
+    - secure-app
+  includeClusterResources: true
+  ttl: 720h
+  storageLocation: default
+  volumeSnapshotLocations:
+    - default
