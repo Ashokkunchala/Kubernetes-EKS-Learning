@@ -150,6 +150,7 @@ spec:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
         name: default
+      expireAfter: 720h
       requirements:
       - key: kubernetes.io/arch
         operator: In
@@ -161,8 +162,8 @@ spec:
         operator: In
         values: ["c", "m", "r"]
   disruption:
-    consolidationPolicy: WhenUnderutilized
-    expireAfter: 720h
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 1m
   limits:
     cpu: "100"
 ```
