@@ -351,8 +351,10 @@ eksctl version
 ### Install kubectl
 
 ```bash
-# Windows
-curl.exe -LO "https://dl.k8s.io/release/$(curl.exe -L -s https://dl.k8s.io/release/stable.txt)/bin/windows/amd64/kubectl.exe"
+# Windows PowerShell: download the current stable release for your architecture.
+# Before using it, confirm it is within one minor version of your EKS cluster.
+$KUBECTL_VERSION = (Invoke-WebRequest -Uri https://dl.k8s.io/release/stable.txt).Content.Trim()
+curl.exe -LO "https://dl.k8s.io/release/$KUBECTL_VERSION/bin/windows/amd64/kubectl.exe"
 
 # Or use Chocolatey
 choco install kubernetes-cli
