@@ -246,7 +246,7 @@ spec:
       serviceAccountName: api-sa
       containers:
       - name: api
-        image: my-api:latest
+        image: my-api:v1.0.0
         env:
         - name: S3_BUCKET
           value: "my-app-bucket"
@@ -278,7 +278,7 @@ spec:
       serviceAccountName: worker-sa
       containers:
       - name: worker
-        image: my-worker:latest
+        image: my-worker:v1.0.0
         env:
         - name: DYNAMODB_TABLE
           value: "Orders"
