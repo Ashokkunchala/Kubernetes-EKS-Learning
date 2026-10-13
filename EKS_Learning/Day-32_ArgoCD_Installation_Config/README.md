@@ -154,6 +154,8 @@ argocd version
 
 ### Step 1: Login via CLI
 
+> **Exposure warning:** The Helm example below sets the Argo CD Service to LoadBalancer, which can create an externally reachable, billable AWS load balancer depending on subnet/controller configuration. For a learning lab, prefer port-forwarding; for shared/production use, configure private access, trusted TLS, authentication, and network restrictions.
+
 ```bash
 # Port forward
 kubectl port-forward svc/argocd-server -n argocd 8080:443 &
@@ -170,10 +172,11 @@ argocd login localhost:8080 \
 ### Step 2: Add Git Repository
 
 ```bash
-# Add via CLI (HTTPS)
+# Set GITHUB_USER and GITHUB_TOKEN securely in your shell; never commit a real token.
+# Prefer a least-privilege, short-lived token or a declarative Argo CD repository Secret.
 argocd repo add https://github.com/yourorg/gitops-repo.git \
-  --username yourusername \
-  --password yourtoken
+  --username "$GITHUB_USER" \
+  --password "$GITHUB_TOKEN"
 
 # Add via CLI (SSH)
 argocd repo add git@github.com:yourorg/gitops-repo.git \
