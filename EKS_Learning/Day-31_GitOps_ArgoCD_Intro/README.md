@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **GitOps** | Managing application/infrastructure state through version-controlled declarations and automation that reconciles the cluster to them. |
+| **Declarative** | Describing the desired result rather than every imperative step to get there. |
+| **Source of truth** | The approved place from which the intended configuration is taken—typically a Git repository in GitOps. |
+| **Reconciliation** | Repeatedly comparing desired state with live state and correcting differences. |
+| **Drift** | A difference between the declared configuration and what is actually running. |
+| **Sync** | Applying the repository's declared configuration to the target cluster. |
+
+**Analogy:** Git is the approved blueprint; Argo CD is the inspector that compares the real building with the blueprint and brings it back into alignment.
+
+**Try / observe:** Inspect an Argo CD Application's repository path, target cluster/Namespace, sync status, and health status before enabling automated sync.
+
+**Troubleshooting clue:** “OutOfSync” means live state differs from desired state; it does not automatically mean the app is down. Review the diff before syncing or pruning resources.
+
+**Explain it back:** How is GitOps different from a pipeline that directly pushes YAML to a cluster?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is GitOps?
