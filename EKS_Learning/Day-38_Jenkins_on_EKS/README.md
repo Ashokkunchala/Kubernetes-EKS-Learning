@@ -106,7 +106,8 @@ helm install jenkins jenkins/jenkins \
 ```yaml
 controller:
   adminUser: admin
-  adminPassword: "ChangeMe123!"
+  # Supply this through a protected values file/secret workflow; never commit the real value.
+  adminPassword: "REPLACE_WITH_STRONG_LAB_PASSWORD"
   resources:
     requests:
       cpu: "500m"
