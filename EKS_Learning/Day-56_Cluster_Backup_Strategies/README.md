@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Backup** | A recoverable copy of selected data or configuration. |
+| **Restore** | Using a backup to recreate the data/resources needed for service. |
+| **etcd** | The Kubernetes key-value store that holds cluster API state; in EKS, AWS manages the control-plane etcd layer. |
+| **Kubernetes objects** | API resources such as Deployments, Services, ConfigMaps, and policy objects. |
+| **Persistent data** | Application data stored beyond the lifetime of a Pod/container. |
+| **Recovery test** | A practical exercise proving that backups can be restored to a usable state. |
+
+**Analogy:** A backup is a spare key; a restore test proves that the key actually opens the door.
+
+**Try / observe:** Define what is being backed up (manifests, application data, external databases, secrets/configuration), who owns it, retention, and how restoration is verified.
+
+**Troubleshooting clue:** A backup of Kubernetes YAML alone does not back up data in EBS/EFS, RDS, or external systems. Map every stateful dependency.
+
+**Explain it back:** What should be backed up outside the cluster? Why is a restore test mandatory?
+
+---
+
 ## 📖 Core Concepts
 
 ### What to Back Up
