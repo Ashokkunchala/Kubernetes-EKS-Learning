@@ -158,6 +158,9 @@ spec:
         name: default
       expireAfter: 720h
       requirements:
+      - key: kubernetes.io/os
+        operator: In
+        values: ["linux"]
       - key: kubernetes.io/arch
         operator: In
         values: ["amd64"]
