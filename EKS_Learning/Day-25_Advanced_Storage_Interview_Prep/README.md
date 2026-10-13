@@ -8,6 +8,27 @@ By the end of today, you will:
 - Pass a storage assessment
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **PV / PVC** | A PersistentVolume represents storage; a PersistentVolumeClaim asks for storage. |
+| **StatefulSet** | A controller for workloads that need stable Pod identities and often persistent storage. |
+| **CSI** | The Container Storage Interface, which lets Kubernetes storage drivers integrate with providers. |
+| **Snapshot** | A point-in-time storage copy that can be used as a restore source. |
+| **EBS vs EFS** | EBS is block storage typically tied to one AZ; EFS is shared network file storage for concurrent clients. |
+| **Binding mode** | StorageClass behavior controlling when a claim is matched/provisioned, including waiting until a Pod's scheduling constraints are known. |
+
+**Analogy:** Pick storage like you pick a vehicle: a fast single-user disk, a shared filing system, and a backup snapshot solve different problems.
+
+**Try / observe:** Explain a storage design aloud: access pattern → durability → zone/multi-zone needs → performance → backup/restore → cost.
+
+**Troubleshooting clue:** Never assume a PVC being Bound proves the application can mount, write, or recover the data. Validate all three.
+
+**Explain it back:** When would you choose EBS, EFS, or a snapshot? What does a StatefulSet add beyond a Deployment?
+
+---
+
 
 ## 📋 Storage Concepts Review
 
