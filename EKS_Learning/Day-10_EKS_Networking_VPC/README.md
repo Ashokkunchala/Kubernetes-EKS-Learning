@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **VPC** | A logically isolated network in AWS. | It defines the IP space and network boundaries for EKS resources. |
+| **Subnet** | A range of IP addresses inside a VPC, associated with one Availability Zone. | EKS needs suitable subnets for nodes and load balancers. |
+| **Route table** | Rules deciding where packets go next. | A subnet can have IP addresses but still lack a path to a required destination. |
+| **Internet Gateway (IGW)** | A VPC component enabling internet routing for eligible resources with public addressing and routes. | A public subnet alone does not make every resource internet-accessible. |
+| **NAT Gateway** | A managed path for private-subnet resources to initiate outbound IPv4 connections. | It is commonly used for private nodes to download images or reach public endpoints; it does not by itself allow unsolicited inbound connections. |
+| **Security group** | A stateful virtual firewall attached to network interfaces/resources. | Rules can allow or block traffic even when Kubernetes Services look correct. |
+
+**Analogy:** VPC is the property, subnets are zones, route tables are road signs, and security groups are entry guards.
+
+**EKS connection:** Public/private subnet tags and subnet discovery can affect where AWS load balancers are created. Validate routes and tags before deploying controllers.
+
+**Try / observe:** `aws ec2 describe-vpcs --region <region>`, `aws ec2 describe-subnets --region <region>`, `aws ec2 describe-route-tables --region <region>`.
+
+**Troubleshooting clue:** For unreachable nodes or load balancers, inspect the subnet route table, IP address type, security-group rules, network ACLs, and DNS—not just the Kubernetes manifest.
+
+**Explain it back:** What is the difference between a public subnet and a private subnet? Why does a private node often need outbound access?
+
+---
+
 ## 📖 Core Concepts
 
 ### EKS VPC Architecture
