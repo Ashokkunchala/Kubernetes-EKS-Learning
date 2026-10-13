@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Metric** | A numeric measurement observed over time. |
+| **Scrape** | Prometheus periodically requests metrics from a target endpoint. |
+| **ServiceMonitor** | A Prometheus Operator custom resource describing how to discover and scrape matching Services. |
+| **Operator** | A Kubernetes controller that automates management of a particular application or system. |
+| **Time series** | A sequence of timestamped values for one metric and its label set. |
+| **Alert rule** | A condition evaluated over metrics that can create an alert when it remains true. |
+
+**Analogy:** Prometheus is a meter reader, ServiceMonitor tells it which meters to read, and an alert rule defines when a reading needs attention.
+
+**Try / observe:** `kubectl get pods,svc -n <monitoring-namespace>`, `kubectl get servicemonitor -A`, and inspect Prometheus targets and rule status.
+
+**Troubleshooting clue:** A ServiceMonitor existing does not prove Prometheus selected it. Check label selectors, target endpoints, Service labels, port names, and scrape errors.
+
+**Explain it back:** What is the difference between a Service and a ServiceMonitor? What does a scrape do?
+
+---
+
 ## 📖 Core Concepts
 
 ### Prometheus Operator Architecture
