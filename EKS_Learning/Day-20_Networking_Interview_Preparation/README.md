@@ -8,6 +8,28 @@ By the end of today, you will:
 - Complete a networking assessment
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Layer 3 (L3)** | Network-layer addressing and routing, commonly IP. |
+| **Layer 4 (L4)** | Transport connections and ports, commonly TCP/UDP. |
+| **Layer 7 (L7)** | Application protocols such as HTTP, where host/path/header rules can be understood. |
+| **ClusterIP** | An internal Kubernetes Service endpoint. |
+| **Ingress** | HTTP/HTTPS routing intent; a controller must implement it. |
+| **CNI** | The plugin interface that configures Pod networking. |
+| **mTLS** | Mutual certificate-based authentication and encrypted transport between peers. |
+
+**Analogy:** L3 gets a packet to the right building, L4 to the right door, and L7 to the right department inside.
+
+**Try / observe:** Draw a request path from client → load balancer → Service → Pod, and label the control responsible at each hop.
+
+**Troubleshooting clue:** A port being open does not prove the HTTP route is correct; separate routing, transport, and application-layer checks.
+
+**Explain it back:** Compare ClusterIP, NodePort, and LoadBalancer. Where does Ingress fit in that picture?
+
+---
+
 
 ## 📋 Networking Concepts Review
 
