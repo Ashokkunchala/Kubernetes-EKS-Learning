@@ -156,7 +156,7 @@ aws ce get-savings-plans-purchase-recommendation \
 **Strategy:**
 - On-Demand/Plans → steady baseline workloads.
 - Spot → elastic swings (batch, CI, autoscaled web).
-- Karpenter picks cheapest type within requirements.
+- Karpenter selects eligible instance types within your requirements using price and capacity information; the lowest-priced option is not always available or suitable.
 
 ---
 
