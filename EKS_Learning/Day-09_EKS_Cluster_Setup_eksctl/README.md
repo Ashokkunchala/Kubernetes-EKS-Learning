@@ -177,8 +177,11 @@ kubectl get svc nginx
 # Get external IP
 kubectl get svc nginx --watch
 
-# Once EXTERNAL-IP is available, access:
+# Once EXTERNAL-IP is available, access the demo endpoint:
 curl http://<external-ip>
+
+# HTTP is used here only to keep the lab simple; use HTTPS for real applications.
+# A LoadBalancer Service can create billable AWS resources. Delete the lab resources when finished.
 ```
 
 ---
