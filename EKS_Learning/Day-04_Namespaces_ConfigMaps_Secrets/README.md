@@ -262,10 +262,12 @@ kind: Secret
 metadata:
   name: app-secrets
 type: Opaque
-data:
-  DB_USERNAME: REPLACE_WITH_BASE64_VALUE  # example placeholder only; do not commit real credentials
-  DB_PASSWORD: REPLACE_WITH_BASE64_VALUE  # example placeholder only; do not commit real credentials
-  API_KEY: REPLACE_WITH_BASE64_VALUE  # example placeholder only; do not commit real credentials
+# stringData accepts plain strings and Kubernetes encodes them when storing the Secret.
+# Replace these placeholders with lab-only values; do not commit real credentials.
+stringData:
+  DB_USERNAME: REPLACE_WITH_LAB_USERNAME
+  DB_PASSWORD: REPLACE_WITH_LAB_PASSWORD
+  API_KEY: REPLACE_WITH_LAB_API_KEY
 ```
 
 ### Use Secret in Pod
