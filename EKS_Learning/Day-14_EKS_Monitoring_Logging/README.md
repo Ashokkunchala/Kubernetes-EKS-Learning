@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **Metric** | A numeric measurement recorded over time, such as CPU usage or request count. | Metrics help answer “how much?” and reveal trends. |
+| **Log** | A timestamped record of an event or message. | Logs help explain what an application or component reported. |
+| **Trace** | A connected view of one request moving across services. | Traces help locate latency or failure across multiple components. |
+| **Prometheus** | A monitoring system that collects and queries time-series metrics. | It can power dashboards and alert rules for Kubernetes workloads. |
+| **CloudWatch** | AWS's monitoring service for metrics, logs, alarms, and related telemetry. | It integrates with AWS services and can collect EKS workload signals. |
+| **Alert** | A rule that notifies someone when a meaningful condition occurs. | Useful alerts point to user impact or an actionable risk, not just noise. |
+
+**Analogy:** Metrics are the dashboard gauges, logs are the event diary, and traces are the route map for one request.
+
+**Try / observe:** `kubectl logs <pod-name>`, `kubectl describe pod <pod-name>`, and inspect the configured Prometheus/CloudWatch dashboards and alert history.
+
+**Troubleshooting clue:** If a dashboard is blank, check whether the collector is running, the target is being scraped, labels/filters match, and the time range is correct.
+
+**Explain it back:** Which question is best answered by metrics, logs, and traces respectively?
+
+---
+
 ## 📖 Core Concepts
 
 ### Monitoring Architecture
