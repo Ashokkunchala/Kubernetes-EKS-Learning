@@ -11,6 +11,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Service mesh** | A platform layer that manages service-to-service traffic, identity, security, and telemetry. |
+| **Sidecar proxy** | A helper proxy running beside an app container and handling its network traffic. |
+| **mTLS** | Mutual TLS: both ends authenticate each other with certificates while traffic is encrypted. |
+| **Traffic policy** | Rules controlling how requests are routed, retried, balanced, or limited. |
+| **Telemetry** | Operational signals such as metrics, logs, and traces. |
+| **Control plane** | The components that distribute configuration to proxies; the data plane is the traffic-handling proxies themselves. |
+
+**Analogy:** The mesh is a managed road system, sidecars are traffic officers, and mTLS is checking both drivers' identities before opening a secure channel.
+
+**Try / observe:** `kubectl get pods -n istio-system`, `istioctl analyze`, and inspect proxy configuration only after confirming Istio is installed.
+
+**Troubleshooting clue:** If traffic fails after mesh injection, compare proxy status, mTLS mode, destination rules, and application ports. A healthy app container does not guarantee a healthy proxy path.
+
+**Explain it back:** What does a sidecar do? How does mTLS differ from encryption without peer authentication?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is a Service Mesh?
