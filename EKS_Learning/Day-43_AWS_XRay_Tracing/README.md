@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Trace** | A connected record of one request's path across services. |
+| **Span** | One timed operation within a trace, such as a database call. |
+| **Latency** | The time a request or operation takes to complete. |
+| **Sampling** | Choosing which requests are recorded for tracing to control overhead and cost. |
+| **Service map** | A visual view of services and their observed dependencies. |
+| **Correlation ID** | An identifier carried across components to connect logs/events for one request. |
+
+**Analogy:** A trace is the full journey of a parcel; each span is one checkpoint, and latency is the time spent at each checkpoint.
+
+**Try / observe:** Follow a single test request and compare its trace, application logs, and metrics using shared IDs/timestamps where available.
+
+**Troubleshooting clue:** Missing traces may mean instrumentation, sampling, permissions, exporter configuration, or network delivery is wrong—not necessarily that the application received no requests.
+
+**Explain it back:** Why can tracing find a slow downstream call that a CPU dashboard cannot explain?
+
+---
+
 ## 📖 Core Concepts
 
 ### Tracing Anatomy
