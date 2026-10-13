@@ -8,6 +8,27 @@ By the end of today, you will:
 - Pass a comprehensive security assessment
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Authentication (AuthN)** | Verifying the identity behind a request. |
+| **Authorization (AuthZ)** | Checking whether that identity is allowed to perform the requested action. |
+| **IAM policy** | AWS permissions rules for API actions, resources, and conditions. |
+| **Kubernetes RBAC** | Kubernetes API permissions defined with Roles/ClusterRoles and their bindings. |
+| **OIDC federation** | Trusting identity tokens from a configured provider instead of storing long-lived user keys. |
+| **Audit trail** | A record of activity used to understand who did what and when. |
+
+**Analogy:** AuthN checks your badge, AuthZ checks the door list, and audit logs record which door was attempted.
+
+**Try / observe:** `aws sts get-caller-identity`, `kubectl auth can-i get pods -n <namespace>`, `kubectl auth can-i get secrets -n <namespace>`. Test denied and allowed actions with a non-production identity.
+
+**Troubleshooting clue:** Classify the failure first: invalid identity, AWS IAM denial, EKS cluster access denial, Kubernetes RBAC denial, or admission-policy denial.
+
+**Explain it back:** Why does a valid AWS identity not automatically mean permission to list Kubernetes Secrets?
+
+---
+
 
 ## 🖥️ Project: Secure Microservices Platform
 
