@@ -252,9 +252,10 @@ kubectl describe application <app> -n argocd
 kubectl -n production describe pod <pod>
 aws ecr describe-images --repository-name demo-app
 
-# ArgoCD can't read repo
+# Argo CD can't read repo: provide credentials through protected shell variables.
 argocd repo add https://github.com/yourorg/gitops-repo.git \
-  --username <user> --password <token>
+  --username "$GITHUB_USER" --password "$GITHUB_TOKEN"
+# Use a least-privilege token; do not commit or print its value.
 ```
 
 ---
