@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Custom metric** | A measurement your application or monitoring pipeline defines and publishes. |
+| **Namespace (CloudWatch)** | A grouping name for related CloudWatch metrics; distinct from a Kubernetes Namespace. |
+| **Dimension** | A key/value label used to distinguish metric series, such as service or environment. |
+| **CloudWatch** | AWS monitoring for metrics, logs, alarms, and related telemetry. |
+| **HPA** | Horizontal Pod Autoscaler: changes a workload's replica count based on observed metrics. |
+| **Metrics adapter** | A bridge that exposes external/custom metrics in a form Kubernetes autoscalers can query. |
+
+**Analogy:** A metric is a gauge reading, a dimension identifies which machine it belongs to, and HPA uses readings to decide how many app copies are needed.
+
+**Try / observe:** Verify the metric exists and has recent values before debugging HPA; then inspect `kubectl get hpa` and `kubectl describe hpa <name>`.
+
+**Troubleshooting clue:** If HPA shows unknown metrics, check the metrics API/adapter, metric name/dimensions, permissions, and whether the target metric is being published.
+
+**Explain it back:** Why can't HPA scale from a custom metric that the metrics API cannot expose?
+
+---
+
 ## 📖 Core Concepts
 
 ### Scaling Stack on EKS
