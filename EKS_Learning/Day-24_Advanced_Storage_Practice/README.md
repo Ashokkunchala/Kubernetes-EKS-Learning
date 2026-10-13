@@ -9,6 +9,27 @@ By the end of today, you will:
 - Solve real-world storage challenges
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Access mode** | The access pattern a volume advertises, such as ReadWriteOnce or ReadWriteMany; it is not a universal guarantee of simultaneous writes from every node. |
+| **Reclaim policy** | What happens to the underlying PV/storage after a PVC is released, such as Retain or Delete. |
+| **Binding** | The association between a PVC and a PV. |
+| **Mount** | Exposing a filesystem or volume at a path inside a container. |
+| **Backup** | A recoverable copy of data/configuration stored independently enough to survive the failure being planned for. |
+| **Stateful workload** | An application whose identity or durable data must survive Pod replacement. |
+
+**Analogy:** The PVC is a reservation, access mode is the permitted usage pattern, and reclaim policy says what happens to the storage after checkout.
+
+**Try / observe:** `kubectl get pvc,pv,storageclass`, `kubectl describe pvc <claim-name>`, `kubectl get events --sort-by=.lastTimestamp`.
+
+**Troubleshooting clue:** PVC Pending, attach failures, mount failures, and application permission errors are different stages. Use events and driver logs to identify which stage failed.
+
+**Explain it back:** What is the risk of a Delete reclaim policy? Why must a restore test include the application, not only the volume?
+
+---
+
 
 ## 🖥️ Project: Complete Storage Solution for a Content Management System
 
