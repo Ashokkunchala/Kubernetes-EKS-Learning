@@ -244,7 +244,7 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "password123"
+          value: "REPLACE_WITH_STRONG_LAB_PASSWORD"
         ports:
         - containerPort: 3306
 ---
