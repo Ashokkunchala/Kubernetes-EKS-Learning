@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **CPU request** | The CPU amount Kubernetes uses as a scheduling requirement for a container. |
+| **Memory limit** | The maximum memory a container may use before it can be terminated for exceeding the limit. |
+| **Utilization** | How much of a resource is being used compared with available/requested capacity. |
+| **Bin packing** | Placing workloads on nodes efficiently while respecting constraints. |
+| **QoS class** | A Kubernetes Pod classification based on resource requests/limits that influences eviction behavior under pressure. |
+| **Right-sizing** | Adjusting requests, limits, and node capacity to fit workload needs. |
+
+**Analogy:** Requests are reserved seats, limits are guardrails, and bin packing is arranging passengers so buses are used efficiently.
+
+**Try / observe:** `kubectl top nodes`, `kubectl top pods -A`, `kubectl describe node <node-name>`; compare measured use with requests and limits.
+
+**Troubleshooting clue:** High requests can leave Pods Pending; low memory limits can cause OOMKilled containers. Use representative measurements rather than guessing from one moment.
+
+**Explain it back:** How do requests differ from limits? Why can low CPU usage coexist with unschedulable Pods?
+
+---
+
 ## 📖 Core Concepts
 
 ### Right-Sizing = Match Capacity to Demand
