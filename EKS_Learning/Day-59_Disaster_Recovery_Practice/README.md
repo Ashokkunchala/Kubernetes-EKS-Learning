@@ -136,11 +136,12 @@ velero restore create --from-backup <latest-backup> \
 # 3. Validate the restore
 velero restore describe <restore-name> --details
 
-# 4. Verify data integrity inside the restored database PVC pod
-kubectl exec -n ecommerce-restored deploy/order-service -- \
-  curl -s http://order-db:5432  > /dev/null || true
-kubectl exec -n ecommerce-restored deploy/product-service -- \
-  wget -qO- http://product-db:5432 | head -3
+# 4. Confirm restored Services and endpoints exist before testing the app.
+kubectl get svc,endpointslices -n ecommerce-restored
+# If the service image includes pg_isready, test PostgreSQL readiness (not HTTP on port 5432):
+kubectl exec -n ecommerce-restored deploy/order-service -- pg_isready -h order-db -p 5432
+kubectl exec -n ecommerce-restored deploy/product-service -- pg_isready -h product-db -p 5432
+# Then run an application-level read/query using the app's normal health or database-check path.
 
 kubectl logs -n ecommerce-restored $(kubectl get pods -n ecommerce-restored -o name | head -1) | tail -20
 
@@ -181,7 +182,8 @@ kubectl -n argocd exec deploy/argocd-server -- \
 # 5. Verify pods are healthy and serving BEFORE cutting traffic
 kubectl get pods -n ecommerce -o wide
 kubectl rollout status deploy/frontend -n ecommerce --timeout=180s
-curl -s -o /dev/null -w "%{http_code}" http://<dr-alb-.amazonaws.com>/healthz
+# Set DR_ALB_DNS to the actual load balancer DNS name from AWS.
+curl -s -o /dev/null -w "%{http_code}\n" "http://${DR_ALB_DNS}/healthz"
 ```
 
 #### Cut traffic (Route53, 30 seconds to decide, minutes to switch)
