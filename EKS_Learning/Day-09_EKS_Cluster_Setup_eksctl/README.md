@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **eksctl** | A command-line tool for creating and managing EKS clusters. | It automates many AWS resources and Kubernetes setup steps. |
+| **Cluster** | The managed Kubernetes environment plus its configured networking and compute. | Cluster creation affects cost and permissions, not just a single server. |
+| **Node group** | A set of EC2 worker nodes managed as a unit. | It defines the capacity that can host Pods. |
+| **kubeconfig** | A local configuration file describing how kubectl reaches a cluster and obtains credentials. | Incorrect or stale configuration can cause confusing connection failures. |
+| **Context** | The selected cluster and identity settings kubectl will use. | Always confirm the context before making changes. |
+| **Region** | An AWS geographic area containing resources. | The cluster and related resources must be queried in the correct Region. |
+
+**Analogy:** eksctl is a setup assistant; the Region is the site, the cluster is the facility, and kubeconfig is the connection card for the facility.
+
+**Try / observe:** `aws sts get-caller-identity`, `eksctl get cluster --region <region>`, `kubectl config get-contexts`, `kubectl config current-context`.
+
+**Troubleshooting clue:** If a cluster is not found, verify the AWS account identity, Region, cluster name, and active context before recreating anything. Cluster creation can incur charges.
+
+**Explain it back:** What does eksctl automate? Why should you inspect the current context before running apply/delete commands?
+
+---
+
 ## 📖 Core Concepts
 
 ### eksctl Overview
