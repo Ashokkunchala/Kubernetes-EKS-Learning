@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Dashboard** | A collection of visualisations used to monitor a system. |
+| **Panel** | One chart, number, table, or visual element inside a dashboard. |
+| **Data source** | The system Grafana queries, such as Prometheus or CloudWatch. |
+| **Query** | The request that selects and transforms data for a panel. |
+| **Alert** | A notification generated when a defined condition is met. |
+| **SLI / SLO** | A Service Level Indicator measures reliability/performance; a Service Level Objective is the target for that indicator. |
+
+**Analogy:** A dashboard is a car's instrument panel; each gauge is a panel, and the data source is the sensor system feeding it.
+
+**Try / observe:** Open a panel's query, verify the data source, time range, units, and labels before trusting the displayed number.
+
+**Troubleshooting clue:** A blank panel can mean no data was collected, a query/label mismatch, a wrong time range, or a data-source permission/connectivity issue.
+
+**Explain it back:** Why should an alert measure user impact rather than just whether a server exists?
+
+---
+
 ## 📖 Core Concepts
 
 ### Grafana Architecture
