@@ -9,6 +9,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **IRSA** | IAM Roles for Service Accounts: a way for Kubernetes workloads on EKS to obtain AWS role credentials through OIDC federation. |
+| **ServiceAccount** | A Kubernetes identity assigned to a Pod. |
+| **IAM role** | An AWS identity that can provide temporary credentials when assumed by a trusted principal. |
+| **Trust relationship** | The conditions defining who can assume a role. |
+| **Permissions policy** | The AWS actions/resources allowed after the role is assumed. |
+| **Least privilege** | Giving each workload only the AWS permissions it actually needs. |
+
+**Analogy:** The ServiceAccount identifies the app; the trust policy checks whether that app may borrow a role; the permissions policy defines what the borrowed role can do.
+
+**Try / observe:** `kubectl get serviceaccounts -A`, `kubectl describe serviceaccount <name> -n <namespace>`, and verify the role trust subject matches the exact namespace and ServiceAccount name.
+
+**Troubleshooting clue:** If one app can access AWS but another cannot, compare the two ServiceAccounts, role annotations, trust subjects, and permissions. Avoid solving this by giving every app administrator access.
+
+**Explain it back:** How can two Pods in one cluster have different AWS permissions? Why are trust and permission policies separate?
+
+---
+
 ## 📖 Core Concepts
 
 ### IRSA for Multiple Services
