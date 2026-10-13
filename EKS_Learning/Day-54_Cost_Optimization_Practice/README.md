@@ -62,10 +62,12 @@ By the end of today, you will:
 
 ```bash
 # 1. Understand current spend
+# Replace these dates with your desired reporting period; End is exclusive.
+START_DATE="2026-09-01"
+END_DATE="2026-10-01"
 aws ce get-cost-and-usage \
-  --time-period Start=<YYYY-MM-DD>,End=<YYYY-MM-DD> \
-  --granularity MONTHLY
-# Replace both dates with the reporting period; End is exclusive. \
+  --time-period "Start=$START_DATE,End=$END_DATE" \
+  --granularity MONTHLY \
   --metrics "UnblendedCost" \
   --group-by Type=DIMENSION,Key=SERVICE
 
