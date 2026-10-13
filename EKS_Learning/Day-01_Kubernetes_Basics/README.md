@@ -327,12 +327,12 @@ With Kubernetes:
 |---------|------------|--------------|----------------|
 | **Complexity** | High | Low | Very Low |
 | **Scalability** | Excellent | Good | Limited |
-| **Auto-scaling** | Yes | No | No |
+| **Auto-scaling** | Supported with configured controllers | No built-in autoscaler | No built-in autoscaler |
 | **Load Balancing** | Built-in | Built-in | Manual |
 | **Rolling Updates** | Yes | Yes | Manual |
 | **Self-healing** | Yes | Yes | No |
 | **Service Discovery** | Yes | Yes | Limited |
-| **Production Ready** | Yes | Yes | No (Dev only) |
+| **Production Ready** | Yes | Yes | Can suit small/single-host workloads; not a multi-node orchestrator |
 | **Learning Curve** | Steep | Moderate | Easy |
 
 ### When to Use What?
@@ -375,22 +375,21 @@ With Kubernetes:
 
 ## 🌍 Real-Time Use Cases
 
-### Companies Using Kubernetes
+### Common Kubernetes Use Cases
 
-| Company | Use Case | Scale |
-|---------|----------|-------|
-| **Netflix** | Streaming infrastructure | Millions of pods |
-| **Spotify** | Music delivery platform | 2M+ pods daily |
-| **Airbnb** | Microservices | 1000+ services |
-| **Samsung** | IoT workloads | Global scale |
-| **The New York Times** | Content delivery | High availability |
-| **Wikimedia** | Wikipedia infrastructure | Open source |
+| Use case | Why Kubernetes can help |
+|---------|--------------------------|
+| Web/API applications | Replicas, health checks, and controlled rollouts |
+| Microservices | Service discovery and independent deployments |
+| Batch processing | Jobs and scheduled CronJobs |
+| Internal developer platforms | Namespaces, access controls, and standard deployment workflows |
+| Data-processing workers | Scheduling and scaling compute workloads |
 
 ### Real-World Scenario
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              NETFLIX - REAL USE CASE                     │
+│             EXAMPLE APPLICATION ARCHITECTURE              │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
 │  │              Netflix Architecture                │   │
@@ -422,7 +421,7 @@ With Kubernetes:
 │  │  │  Features:                               │   │   │
 │  │  │  • Auto-scaling (peak hours)            │   │   │
 │  │  │  • Self-healing (fault tolerance)       │   │   │
-│  │  │  • Rolling updates (zero downtime)      │   │   │
+│  │  │  • Rolling updates to reduce disruption │   │   │
 │  │  │  • Service discovery (microservices)    │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
