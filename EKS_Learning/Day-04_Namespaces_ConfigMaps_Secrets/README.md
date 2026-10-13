@@ -177,7 +177,7 @@ metadata:
 spec:
   containers:
   - name: app
-    image: my-app:latest
+    image: my-app:v1.0.0
     # Method 1: Environment variables
     envFrom:
     - configMapRef:
@@ -357,11 +357,17 @@ kubectl delete configmap app-config
 ### Secret Commands
 
 ```bash
-# Create Secret
-kubectl create secret generic app-secrets --from-literal=DB_PASSWORD=password123
-kubectl create secret generic app-secrets --from-file=db-password.txt
+# Create a lab Secret without writing the value directly in command history.
+read -s -p "Lab-only DB password: " DB_PASSWORD; echo
+kubectl create secret generic app-secrets --from-literal=DB_PASSWORD="$DB_PASSWORD"
+unset DB_PASSWORD
+
+# Create from a file only if that file is protected and excluded from Git.
+kubectl create secret generic app-secrets-from-file --from-file=db-password.txt
 kubectl create secret tls tls-secret --cert=cert.pem --key=key.pem
-kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username=user --docker-password=pass
+
+# Use shell variables for registry credentials; do not use a literal password.
+kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username="$REGISTRY_USERNAME" --docker-password="$REGISTRY_PASSWORD"
 
 # List Secrets
 kubectl get secrets
@@ -369,8 +375,9 @@ kubectl get secrets
 # Describe Secret
 kubectl describe secret app-secrets
 
-# Get Secret (base64 encoded)
-kubectl get secret app-secrets -o yaml
+# Inspect Secret metadata and keys without printing encoded values.
+kubectl describe secret app-secrets
+# Do not print Secret data into terminal logs or shared output.
 
 # Decode Secret value
 kubectl get secret app-secrets -o jsonpath='{.data.DB_PASSWORD}' | base64 -d
@@ -421,13 +428,13 @@ kubectl exec -it configmap-pod -- env | grep DATABASE
 ### Exercise 2: Create and Use Secret
 
 ```bash
-# Create Secret
+# Create a lab-only Secret; set DB_PASSWORD in your shell first.
 kubectl create secret generic db-secrets \
   --from-literal=USERNAME=admin \
-  --from-literal=PASSWORD=password123
+  --from-literal=PASSWORD="$DB_PASSWORD"
 
-# Verify (shows base64 encoded)
-kubectl get secret db-secrets -o yaml
+# Verify metadata and key names without exposing values.
+kubectl describe secret db-secrets
 ```
 
 ```yaml
