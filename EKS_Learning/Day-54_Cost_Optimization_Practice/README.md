@@ -100,6 +100,9 @@ spec:
         name: default
       expireAfter: 168h
       requirements:
+      - key: kubernetes.io/os
+        operator: In
+        values: ["linux"]
       - key: karpenter.sh/capacity-type
         operator: In
         values: ["spot", "on-demand"]
