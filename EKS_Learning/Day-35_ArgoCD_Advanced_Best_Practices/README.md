@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **AppProject** | An Argo CD boundary that can restrict permitted repositories, destinations, and resource kinds for Applications. |
+| **RBAC** | Role-Based Access Control: permissions that map identities/groups to allowed actions. |
+| **Sync policy** | Settings controlling whether and how Argo CD applies changes automatically or manually. |
+| **Health status** | Argo CD's interpretation of whether a resource appears healthy according to its resource checks. |
+| **Multi-tenancy** | Sharing a platform among teams while separating their permissions, resources, and operational boundaries. |
+| **Secret management** | Safely providing credentials without committing plaintext secrets to source control. |
+
+**Analogy:** AppProject is a fenced work area, RBAC is the badge/access list, and sync policy determines who can approve changes automatically.
+
+**Try / observe:** Review project source/destination restrictions, user roles, repository credentials, and automated sync settings before onboarding another team.
+
+**Troubleshooting clue:** An Application may be blocked by project policy even when its YAML is valid. Inspect the Application's conditions and the AppProject allow-lists.
+
+**Explain it back:** How does AppProject reduce risk? Why should repo access and cluster destination permissions both be restricted?
+
+---
+
 ## 📖 Core Concepts
 
 ### ArgoCD Security Model
