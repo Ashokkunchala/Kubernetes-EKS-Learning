@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **Least privilege** | Grant only the permissions required for a specific task. | It reduces the impact of mistakes or compromised credentials. |
+| **RBAC** | Kubernetes rules that bind identities to allowed API actions. | It controls who can read, change, or delete cluster objects. |
+| **Pod Security Standards (PSS)** | Kubernetes-defined security levels for Pod configurations: Privileged, Baseline, and Restricted. | They help prevent risky container settings from being admitted. |
+| **Image scanning** | Checking a container image for known vulnerabilities and policy violations. | It catches some risks before the image runs; it does not guarantee an image is safe. |
+| **Audit log** | A record of API activity, including who made a request and what happened. | It supports investigations and accountability. |
+| **Secret management** | Securely storing, delivering, limiting access to, and rotating credentials. | Credentials should not be baked into images or committed to Git. |
+
+**Analogy:** Security is layered like a building: identity checks, room permissions, locked cabinets, and camera logs all serve different purposes.
+
+**Try / observe:** `kubectl auth can-i --list -n <namespace>`, `kubectl get pod <pod-name> -o yaml`, and inspect enabled EKS control-plane audit logging.
+
+**Troubleshooting clue:** A denied request is not always an AWS IAM problem. Identify whether the denial comes from AWS IAM/EKS access, Kubernetes RBAC, admission policy, or a network control.
+
+**Explain it back:** Why are IAM and Kubernetes RBAC separate controls? What can image scanning not prove?
+
+---
+
 ## 📖 Core Concepts
 
 ### EKS Security Layers
