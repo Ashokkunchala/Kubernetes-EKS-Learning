@@ -169,10 +169,12 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 
 # Install Prometheus stack (includes Grafana)
+read -s -p "Lab-only Grafana admin password: " GRAFANA_ADMIN_PASSWORD; echo
 helm install prometheus prometheus-community/kube-prometheus-stack \
   -n monitoring \
   --create-namespace \
-  --set grafana.adminPassword=admin123
+  --set grafana.adminPassword="$GRAFANA_ADMIN_PASSWORD"
+unset GRAFANA_ADMIN_PASSWORD
 ```
 
 ### Step 4: Access Grafana
@@ -210,10 +212,12 @@ kubectl get pods -n amazon-cloudwatch
 # Create monitoring namespace
 kubectl create namespace monitoring
 
-# Install Prometheus stack
+# Install Prometheus stack with a lab-only password entered interactively.
+read -s -p "Lab-only Grafana admin password: " GRAFANA_ADMIN_PASSWORD; echo
 helm install prometheus prometheus-community/kube-prometheus-stack \
   -n monitoring \
-  --set grafana.adminPassword=admin123
+  --set grafana.adminPassword="$GRAFANA_ADMIN_PASSWORD"
+unset GRAFANA_ADMIN_PASSWORD
 
 # Check installation
 kubectl get pods -n monitoring
