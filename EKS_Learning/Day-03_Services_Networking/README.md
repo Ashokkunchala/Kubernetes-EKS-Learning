@@ -10,6 +10,30 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning in everyday language | Why it matters |
+|---|---|---|
+| **Pod IP** | An address assigned to a Pod by the cluster network. | Pods can be replaced and their IPs can change, so clients should not depend on a specific Pod IP. |
+| **Service** | A stable name and virtual network endpoint for a changing set of Pods. | Clients can reach an app even when individual Pods are replaced. |
+| **Selector** | A rule matching Pods by labels. | A Service sends traffic only to Pods matching its selector and considered usable endpoints. |
+| **ClusterIP** | A Service address reachable from inside the cluster. | Common for internal app-to-app communication. |
+| **NodePort** | A Service exposed on a port on cluster nodes. | Useful for certain labs; it is not automatically a production-grade public entry point. |
+| **LoadBalancer** | A Service type that asks the environment to provide a load balancer when supported. | On EKS, integration can provision an AWS load balancer depending on configuration. |
+| **DNS / service discovery** | Resolving a human-friendly name to an address. | Applications can call a Service by DNS name instead of tracking Pod IPs. |
+
+**Analogy:** Pods are changing shop staff; a Service is the permanent shop phone number that directs calls to available staff.
+
+**EKS connection:** A `LoadBalancer` Service may create an AWS load balancer and incur cost. Check what your manifest provisions before applying it.
+
+**Try / observe:** `kubectl get svc,endpointslices`, `kubectl describe svc <service-name>`, `kubectl get pods --show-labels`.
+
+**Troubleshooting clue:** A Service with no usable endpoints commonly points to a selector/label mismatch or Pods that are not Ready. Compare the Service selector with Pod labels before debugging routing.
+
+**Explain it back:** Why is a Service more stable than a Pod IP? When would you choose ClusterIP versus LoadBalancer?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is a Service?
