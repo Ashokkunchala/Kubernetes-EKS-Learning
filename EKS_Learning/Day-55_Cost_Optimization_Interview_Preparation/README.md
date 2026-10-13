@@ -10,6 +10,27 @@ By the end of today, you will:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **TCO (Total Cost of Ownership)** | The full cost of running a solution, including infrastructure and operational effort. |
+| **Utilization** | The share of available capacity being used. |
+| **Overprovisioning** | Paying for more resources than the workload reasonably needs. |
+| **Spot** | Discounted EC2 capacity that may be interrupted. |
+| **Autoscaling** | Automatically adjusting replicas or node capacity as demand changes. |
+| **Cost guardrail** | A budget, policy, alert, or limit intended to prevent unexpected spending. |
+
+**Analogy:** A cost review is like checking both fuel price and mileage; cheaper compute can still be wasteful if the workload is poorly sized.
+
+**Try / observe:** Present one recommendation with evidence: current usage, cost impact, reliability risk, rollout plan, and a rollback threshold.
+
+**Troubleshooting clue:** Investigate unexpected cost by service, Region, tag, and usage type before deleting resources; confirm whether spend supports production dependencies.
+
+**Explain it back:** How do you balance cost reduction against availability and performance?
+
+---
+
 ## 📖 Core Concepts - The FinOps Framework
 
 ```
