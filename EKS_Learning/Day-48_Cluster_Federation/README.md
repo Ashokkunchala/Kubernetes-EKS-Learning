@@ -10,6 +10,8 @@ By the end of today, you will understand:
 
 ---
 
+> **Maintenance warning:** KubeFed was archived by the Kubernetes SIG Multicluster project in 2023 and is no longer actively developed. Treat the manifests below as historical/educational material only, not a production recommendation. For a real multi-cluster design, evaluate currently maintained tools and explicitly plan cluster identity, networking, rollout, observability, and failure recovery.
+
 ## 🧠 Plain-English terms before you start
 
 | Term | Plain-English meaning |
