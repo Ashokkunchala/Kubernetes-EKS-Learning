@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **OIDC** | OpenID Connect, a standard for conveying identity using tokens on top of OAuth 2.0. |
+| **Identity provider** | A system that issues or vouches for identity information. |
+| **JWT** | JSON Web Token: a compact token containing claims that can be checked by a recipient. |
+| **Issuer** | The identity provider that issued a token; its identity must match the configured trust. |
+| **Audience (`aud`)** | The intended recipient of a token; it helps prevent using a token in the wrong place. |
+| **Trust policy** | The IAM role rule that states which principal may assume the role and under what conditions. |
+
+**Analogy:** OIDC is a trusted ID office, the JWT is the signed ID card, the issuer identifies the office, and audience says which desk should accept it.
+
+**EKS connection:** IRSA uses the cluster's OIDC identity provider so a Pod's Kubernetes ServiceAccount can be mapped to an AWS IAM role under explicit trust conditions.
+
+**Try / observe:** Inspect the cluster's OIDC issuer URL and compare the IAM trust policy's issuer, audience, and ServiceAccount subject carefully. Never paste live tokens into chat or logs.
+
+**Troubleshooting clue:** A role-assumption failure often comes from a mismatched issuer URL, audience, namespace/ServiceAccount subject, or missing trust relationship.
+
+**Explain it back:** Why is OIDC setup not the same thing as granting S3 permissions? What do issuer and audience claims protect?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is OIDC?
