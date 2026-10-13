@@ -31,6 +31,8 @@ By the end of today, you will understand:
 
 ---
 
+> **Lab credential safety:** These examples use a placeholder, not a usable password. Before running a database lab, replace `REPLACE_WITH_STRONG_LAB_PASSWORD` in the manifest with a strong, lab-only value and set `MYSQL_ROOT_PASSWORD` to the same value in your Bash shell (for example, `export MYSQL_ROOT_PASSWORD='your-lab-only-value'`). Do not reuse real credentials or commit them to Git. For production, use a Kubernetes Secret with restricted access or an external secret manager.
+
 ## 📖 Core Concepts
 
 ### What are Volume Snapshots?
@@ -129,7 +131,7 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "password123"
+          value: "REPLACE_WITH_STRONG_LAB_PASSWORD"
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
@@ -147,10 +149,10 @@ kubectl wait --for=condition=ready pod -l app=mysql --timeout=120s
 
 # Insert data
 MYSQL_POD=$(kubectl get pods -l app=mysql -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -it $MYSQL_POD -- mysql -u root -ppassword123 -e "CREATE DATABASE testdb; CREATE TABLE testdb.users (id INT, name VARCHAR(50)); INSERT INTO testdb.users VALUES (1, 'Alice'), (2, 'Bob');"
+kubectl exec -it $MYSQL_POD -- mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE testdb; CREATE TABLE testdb.users (id INT, name VARCHAR(50)); INSERT INTO testdb.users VALUES (1, 'Alice'), (2, 'Bob');"
 
 # Verify data exists
-kubectl exec -it $MYSQL_POD -- mysql -u root -ppassword123 -e "SELECT * FROM testdb.users;"
+kubectl exec -it $MYSQL_POD -- mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT * FROM testdb.users;"
 ```
 
 ### Step 3: Create Volume Snapshot
@@ -236,7 +238,7 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "password123"
+          value: "REPLACE_WITH_STRONG_LAB_PASSWORD"
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
@@ -254,7 +256,7 @@ kubectl wait --for=condition=ready pod -l app=mysql-restored --timeout=120s
 
 # Verify data was restored
 MYSQL_RESTORED=$(kubectl get pods -l app=mysql-restored -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -it $MYSQL_RESTORED -- mysql -u root -ppassword123 -e "SELECT * FROM testdb.users;"
+kubectl exec -it $MYSQL_RESTORED -- mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT * FROM testdb.users;"
 # Should show: 1 Alice, 2 Bob
 ```
 
