@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Argo CD Application** | A declaration of which Git source should be deployed to which cluster and Namespace. |
+| **App of Apps** | A pattern where one Argo CD Application manages other Application resources. |
+| **Helm** | A package manager for Kubernetes that uses charts and configurable values to render manifests. |
+| **Kustomize** | A tool that customizes Kubernetes YAML using bases and overlays without requiring a templating language. |
+| **Environment promotion** | Moving a tested release/configuration from dev to staging and production through controlled changes. |
+| **Sync wave** | An ordering mechanism for applying related Argo CD resources in a planned sequence. |
+
+**Analogy:** Helm is a configurable package, Kustomize is a set of overlays on a base blueprint, and promotion is moving a tested release through checkpoints.
+
+**Try / observe:** For each Application, identify the source repo/path/revision and destination cluster/Namespace; review rendered manifests before syncing.
+
+**Troubleshooting clue:** If rendered resources differ from what you expect, check the Git revision, Helm values, Kustomize overlays, and Application path before investigating the cluster.
+
+**Explain it back:** When might you choose Helm versus Kustomize? What problem does Application composition solve?
+
+---
+
 ## 📖 Core Concepts
 
 ### ArgoCD Application Patterns
