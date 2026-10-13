@@ -224,9 +224,9 @@ spec:
 │  │  Secret: app-secrets                            │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
 │  │  │  DATA (Base64 encoded):                  │   │   │
-│  │  │  - DB_USERNAME: YWRtaW4=                 │   │   │
-│  │  │  - DB_PASSWORD: cGFzc3dvcmQxMjM=         │   │   │
-│  │  │  - API_KEY: c2VjcmV0LWFwaS1rZXk=         │   │   │
+│  │  │  - DB_USERNAME: <base64-placeholder>      │   │   │
+│  │  │  - DB_PASSWORD: <base64-placeholder>      │   │   │
+│  │  │  - API_KEY: <base64-placeholder>           │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  │                                                   │   │
 │  │  ⚠️  Note: Base64 is NOT encryption!            │   │
