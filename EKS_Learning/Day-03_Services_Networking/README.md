@@ -224,7 +224,7 @@ spec:
 │  ✅ External access                                    │
 │  ✅ Simple setup                                       │
 │  ❌ High port range (30000-32767)                      │
-│  ❌ Not production ready                               │
+│  ⚠️ Needs deliberate exposure and security controls    │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -277,7 +277,7 @@ spec:
 │  │ └─────────┘ │ │ └─────────┘ │ │ └─────────┘ │      │
 │  └─────────────┘ └─────────────┘ └─────────────┘      │
 │                                                         │
-│  ✅ Production ready                                   │
+│  ✅ Can be production-suitable with proper controls    │
 │  ✅ External load balancing                            │
 │  ✅ Health checks                                      │
 │  ❌ Cost (cloud provider charges)                      │
