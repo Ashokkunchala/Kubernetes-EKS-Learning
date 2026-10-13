@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Sync** | Applying the declared Git state to the destination cluster. |
+| **Diff** | The comparison between declared configuration and live resources. |
+| **Drift** | A difference between desired and live state. |
+| **Prune** | Removing resources that are no longer present in the declared source, when pruning is enabled/approved. |
+| **Self-heal** | Automatically reconciling certain live changes back to the declared configuration. |
+| **Rollback** | Returning to a previously known-good release/configuration; in GitOps, a reviewed Git revert is often the durable source-of-truth approach. |
+
+**Analogy:** Diff is the inspection report, sync applies the approved blueprint, and prune removes items no longer on the plan.
+
+**Try / observe:** Inspect the Application diff and sync options before enabling automated prune or self-heal. Prefer reverting a bad Git commit over making an undocumented live-only fix.
+
+**Troubleshooting clue:** If sync loops or keeps reverting manual edits, check whether GitOps is correctly enforcing the repository state. Make the intended change in Git.
+
+**Explain it back:** Why can manual kubectl edits disappear under GitOps? What is the risk of pruning?
+
+---
+
 ## 📖 Core Concepts
 
 ### ArgoCD Sync Process
