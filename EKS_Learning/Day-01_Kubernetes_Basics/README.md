@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning in everyday language | Why it matters |
+|---|---|---|
+| **Container** | A packaged application plus the files and libraries it needs to run. | It makes the app behave consistently across environments. |
+| **Orchestration** | Coordinating many containers automatically. | Someone must place workloads, restart failures, and scale copies. |
+| **Cluster** | The group of machines Kubernetes manages as one system. | Workloads can run across multiple machines instead of one server. |
+| **Control plane** | The decision-making components that accept requests and coordinate the cluster. | It decides what should happen; it does not normally run your app containers itself. |
+| **Worker node** | A machine that provides CPU and memory to run Pods. | If capacity is missing, Pods may remain Pending. |
+| **Desired state** | The result you ask Kubernetes to maintain, such as three replicas. | Controllers repeatedly compare the request with reality and correct differences. |
+
+**Analogy:** Kubernetes is like a logistics coordinator: the control plane plans, worker nodes do the work, and the desired state is the order to fulfil.
+
+**EKS connection:** Amazon EKS manages the Kubernetes control plane; you still choose and operate the worker capacity and workloads.
+
+**Try / observe:** `kubectl get nodes`, `kubectl get pods -A`, `kubectl describe node <node-name>`. These are read-only inspection commands; replace placeholders with real names.
+
+**Troubleshooting clue:** A Pod stuck in `Pending` often means Kubernetes cannot place it yet (for example, insufficient CPU/memory or scheduling constraints). Check `kubectl describe pod <pod-name>` and read the Events section.
+
+**Explain it back:** What is the difference between a cluster, a node, and a Pod? Why is Kubernetes called an orchestration platform?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is Kubernetes?
