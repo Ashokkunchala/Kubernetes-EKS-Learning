@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **EKS Anywhere** | AWS-supported tooling for creating and operating Kubernetes clusters in customer-managed environments. |
+| **Control plane** | Components that expose the Kubernetes API and coordinate cluster state. |
+| **Bare metal** | Physical servers rather than virtual machines. |
+| **Cluster lifecycle** | The work of creating, upgrading, scaling, maintaining, and retiring a cluster. |
+| **Distribution** | A packaged Kubernetes implementation and its supporting components. |
+| **Management responsibility** | The tasks your team must perform even when software/tools are supported by a vendor. |
+
+**Analogy:** EKS Anywhere provides a managed approach to the blueprint and tools, but the customer still owns the physical site and many operational responsibilities.
+
+**Try / observe:** Separate which components are vendor-managed/supportable from which are your team's responsibility: hardware, networking, upgrades, backups, monitoring, and incident response.
+
+**Troubleshooting clue:** In on-prem environments, check infrastructure prerequisites and network/DNS/certificate reachability before treating a failed cluster component as an application issue.
+
+**Explain it back:** How does EKS Anywhere differ from the EKS managed control plane in AWS?
+
+---
+
 ## 📖 Core Concepts
 
 ### EKS Anywhere Positioning
