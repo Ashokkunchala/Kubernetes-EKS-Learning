@@ -206,7 +206,7 @@ spec:
 
 ### What are Secrets?
 
-**Secrets** store sensitive data (passwords, tokens, certificates) in base64 encoded format. They're more secure than ConfigMaps for confidential data.
+**Secrets** are Kubernetes objects intended for sensitive values (passwords, tokens, certificates). Their values are commonly represented as base64 in YAML, but base64 is not encryption. A Secret is not automatically safer than a ConfigMap unless access is restricted and storage/configuration protections are in place. Enable encryption at rest where appropriate and grant least-privilege access.
 
 **Use Cases:**
 - Database passwords
@@ -263,9 +263,9 @@ metadata:
   name: app-secrets
 type: Opaque
 data:
-  DB_USERNAME: YWRtaW4=  # base64 encoded 'admin'
-  DB_PASSWORD: cGFzc3dvcmQxMjM=  # base64 encoded 'password123'
-  API_KEY: c2VjcmV0LWFwaS1rZXk=  # base64 encoded 'secret-api-key'
+  DB_USERNAME: REPLACE_WITH_BASE64_VALUE  # example placeholder only; do not commit real credentials
+  DB_PASSWORD: REPLACE_WITH_BASE64_VALUE  # example placeholder only; do not commit real credentials
+  API_KEY: REPLACE_WITH_BASE64_VALUE  # example placeholder only; do not commit real credentials
 ```
 
 ### Use Secret in Pod
@@ -548,7 +548,7 @@ kubectl get secret <name> -o jsonpath='{.data.KEY}' | base64 -d
    - **Answer:** Namespaces provide a way to divide cluster resources between multiple users or teams. They provide scope for names and can be used to apply access control and resource quotas.
 
 2. **What is the difference between ConfigMap and Secret?**
-   - **Answer:** ConfigMap stores non-confidential configuration data. Secret stores sensitive data (passwords, tokens) in base64 encoded format. Secrets should be encrypted at rest for better security.
+   - **Answer:** ConfigMap is for non-sensitive configuration; Secret is intended for sensitive values. Base64 is only an encoding, not encryption. Protect Secrets with least-privilege RBAC, encryption at rest, and safe delivery/rotation practices.
 
 3. **How are Secrets stored in Kubernetes?**
    - **Answer:** Secrets are stored in etcd as base64 encoded values. They should be encrypted at rest using KMS or external secret managers for production use.
