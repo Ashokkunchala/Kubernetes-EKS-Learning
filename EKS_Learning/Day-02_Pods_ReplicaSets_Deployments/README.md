@@ -700,7 +700,7 @@ docker pull <image-name>
 
 13. **What is the difference between RollingUpdate and Recreate strategy?**
     - **Answer:** 
-      - RollingUpdate: Gradually replaces old pods (zero downtime)
+      - RollingUpdate: Gradually replaces old Pods. It can reduce downtime, but zero downtime is not guaranteed; readiness probes, capacity, app compatibility, and traffic handling matter.
       - Recreate: Terminates all old pods before creating new ones (downtime)
 
 14. **How do you pause a deployment rollout?**
