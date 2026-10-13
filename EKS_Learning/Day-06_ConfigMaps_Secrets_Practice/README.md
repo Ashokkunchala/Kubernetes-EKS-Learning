@@ -87,7 +87,7 @@ By the end of today, you will understand:
 │  │  ┌─────────────────────────────────────────┐   │   │
 │  │  │  kubectl create secret generic my-secret│   │   │
 │  │  │    --from-literal=username=admin \      │   │   │
-│  │  │    --from-literal=password=secret123    │   │   │
+│  │  │    --from-literal=password=<lab-only-value>    │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
