@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Snapshot** | A point-in-time storage copy used as a recovery source. |
+| **Restore** | Creating a usable volume/data set from a backup or snapshot. |
+| **CSI snapshot controller** | Kubernetes components that coordinate volume snapshot API requests with a storage driver. |
+| **RPO (Recovery Point Objective)** | The maximum acceptable amount of data loss measured in time. |
+| **RTO (Recovery Time Objective)** | The target maximum time to restore service after an incident. |
+| **Data consistency** | Whether the restored data is mutually coherent, especially across active writes or multiple volumes. |
+
+**Analogy:** A snapshot is a saved game; RPO says how far back you can tolerate going, and RTO says how long you can tolerate being unable to play.
+
+**Try / observe:** Verify the snapshot class/driver, create a test snapshot, restore to a new claim, and validate the application data before trusting the procedure.
+
+**Troubleshooting clue:** A snapshot object can exist while the restore is not usable. Check snapshot readiness, driver support, events, capacity, zone constraints, and application consistency.
+
+**Explain it back:** Why is “backup succeeded” not enough evidence that disaster recovery works?
+
+---
+
 ## 📖 Core Concepts
 
 ### What are Volume Snapshots?
