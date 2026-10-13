@@ -159,6 +159,8 @@ argocd version
 kubectl port-forward svc/argocd-server -n argocd 8080:443 &
 
 # Login
+# --insecure skips TLS certificate verification; use only for this local port-forward lab.
+# In production, configure a trusted TLS certificate and omit --insecure.
 argocd login localhost:8080 \
   --username admin \
   --password <password> \
