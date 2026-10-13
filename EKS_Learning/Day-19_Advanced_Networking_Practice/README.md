@@ -9,6 +9,26 @@ By the end of today, you will understand:
 - Complete microservices networking
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **DNS resolution** | Translating a name into an IP address or other DNS record. |
+| **Routing** | Choosing the next network hop for packets. |
+| **Security group** | An AWS stateful firewall associated with network interfaces/resources. |
+| **NetworkPolicy** | A Kubernetes rule that can limit Pod-to-Pod or other Pod traffic when supported by the CNI. |
+| **Packet path** | The full sequence of interfaces, routes, policies, and proxies crossed by traffic. |
+
+**Analogy:** Troubleshooting a network is like tracing a delivery route one checkpoint at a time; do not assume the last checkpoint is the problem.
+
+**Try / observe:** `kubectl get svc,endpointslices -A`, `kubectl get pods -o wide -A`, `kubectl describe networkpolicy -n <namespace>`; test DNS and connectivity from a temporary Pod.
+
+**Troubleshooting clue:** Check in order: name resolution → Service selector/endpoints → Pod readiness/listener → Kubernetes policy → AWS security groups/routes. Use the order as a guide, not a guarantee.
+
+**Explain it back:** Why should you test name resolution separately from TCP connectivity?
+
+---
+
 
 ## 🖥️ Project: Complete E-Commerce Network Setup
 
