@@ -17,6 +17,7 @@
 | [`EKS_QUICK_REFERENCE.md`](EKS_QUICK_REFERENCE.md) | Command cheat sheet + troubleshooting + security checklist |
 | [`EKS_FOUNDATION_REVIEW.md`](EKS_FOUNDATION_REVIEW.md) | Consolidated review of **Days 1–15** |
 | [`GLOSSARY.md`](GLOSSARY.md) | A-to-Z dictionary of every EKS & Kubernetes term |
+| [`KUBERNETES_EKS_CONCEPTS_PLAIN_ENGLISH.md`](KUBERNETES_EKS_CONCEPTS_PLAIN_ENGLISH.md) | Beginner-friendly explanations, AuthN vs AuthZ, EKS identity, comparisons, troubleshooting terms and quizzes |
 | [`ARCHITECTURE_PATTERNS.md`](ARCHITECTURE_PATTERNS.md) | 9 production design patterns + a decision tree |
 | [`TROUBLESHOOTING_PLAYBOOK.md`](TROUBLESHOOTING_PLAYBOOK.md) | 10 incident runbooks + universal triage commands |
 | [`EKS_Learning/Day-60_.../README.md`](EKS_Learning/Day-60_Final_Review_Certification_Preparation/README.md) | Final review = **Days 16–60** blueprint + certification prep |
