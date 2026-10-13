@@ -235,7 +235,7 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "password123"
+          value: "REPLACE_WITH_STRONG_LAB_PASSWORD"
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
@@ -318,7 +318,7 @@ kubectl exec -it $(kubectl get pods -l app=web -o jsonpath='{.items[2].metadata.
 MYSQL_POD=$(kubectl get pods -l app=mysql -o jsonpath='{.items[0].metadata.name}')
 
 # Create data
-kubectl exec -it $MYSQL_POD -- mysql -u root -ppassword123 -e "CREATE DATABASE cms; CREATE TABLE cms.posts (id INT, title VARCHAR(100), body TEXT); INSERT INTO cms.posts VALUES (1, 'Hello World', 'First post');"
+kubectl exec -it $MYSQL_POD -- mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE cms; CREATE TABLE cms.posts (id INT, title VARCHAR(100), body TEXT); INSERT INTO cms.posts VALUES (1, 'Hello World', 'First post');"
 
 # Delete pod (data should persist)
 kubectl delete pod $MYSQL_POD
@@ -326,7 +326,7 @@ kubectl wait --for=condition=ready pod -l app=mysql --timeout=120s
 
 # Verify data still exists (EBS persistence)
 NEW_MYSQL=$(kubectl get pods -l app=mysql -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -it $NEW_MYSQL -- mysql -u root -ppassword123 -e "SELECT * FROM cms.posts;"
+kubectl exec -it $NEW_MYSQL -- mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT * FROM cms.posts;"
 ```
 
 ### Lab 3: S3 Media Access
