@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **AWS Secrets Manager** | A managed service for storing, controlling access to, and rotating secrets such as database passwords. |
+| **Secret rotation** | Replacing a credential periodically and ensuring dependent applications can use the new value. |
+| **External Secrets integration** | A controller or integration that copies/references external secret-store values as Kubernetes Secret objects. |
+| **CSI secret mount** | A driver-based way to mount secret-store values into a Pod as files, depending on the chosen provider/driver. |
+| **Encryption at rest** | Protecting stored data using encryption while it is saved on disk/service storage. |
+| **IAM permission** | An AWS policy grant allowing a principal to perform specific API actions on specific resources. |
+
+**Analogy:** Secrets Manager is a managed vault; IAM is the access list, and rotation is changing the lock and coordinating the new key with applications.
+
+**Try / observe:** Verify the application's workload identity and the smallest required read permission. Use a test secret; do not place real secret values in YAML committed to Git.
+
+**Troubleshooting clue:** If the secret cannot be fetched, check identity, IAM resource ARN/region, network access, secret version/stage, and integration logs. If fetched but app still fails, check key names and refresh/restart behavior.
+
+**Explain it back:** What does rotation change? Why should an app's IAM role be limited to a specific secret?
+
+---
+
 ## 📖 Core Concepts
 
 ### Secret Management Options
