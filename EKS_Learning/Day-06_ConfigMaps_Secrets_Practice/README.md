@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Everyday meaning | Why it matters |
+|---|---|---|
+| **Configuration** | Settings that control how an app behaves, such as a log level or endpoint. | It should usually be changed without rebuilding the app image. |
+| **ConfigMap** | Kubernetes storage for non-sensitive configuration. | It lets a Pod consume settings as environment variables or files. |
+| **Secret** | Kubernetes storage designed for sensitive values. | Only authorised identities and workloads should be able to read it. |
+| **Base64** | A way to represent bytes as text, not a protection mechanism. | Anyone who obtains a base64 value can decode it. |
+| **Environment variable** | A key/value passed to the running process. | Many apps read configuration this way at startup. |
+| **Least privilege** | Give each person or workload only the access it needs. | It limits damage if a credential or Pod is compromised. |
+
+**Analogy:** A ConfigMap is a public instruction sheet; a Secret is a locked envelope. Base64 is like writing the envelope contents in a different alphabet—not locking it.
+
+**EKS connection:** For production credentials, consider AWS Secrets Manager or Parameter Store integration, encryption at rest, restricted IAM/RBAC, and rotation.
+
+**Try / observe:** `kubectl describe pod <pod-name>`, `kubectl get configmap <name> -o yaml`. Do not run commands that print real Secret data into shared logs or commit secret values to Git.
+
+**Troubleshooting clue:** If a setting is missing, verify the object name, Namespace, key name, and whether the Pod uses an environment variable or mounted file. A running process may need a restart to read updated environment values.
+
+**Explain it back:** Why is base64 not encryption? How would you restrict which workload can read a Secret?
+
+---
+
 ## 📖 Core Concepts
 
 ### ConfigMap Creation Methods
