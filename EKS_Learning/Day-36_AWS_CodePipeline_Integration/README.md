@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Pipeline** | A sequence of automated steps that moves a change from source to a validated release. |
+| **Source stage** | Retrieves the code or configuration that starts the workflow. |
+| **Build stage** | Compiles, packages, tests, or scans the software. |
+| **Artifact** | A file or package produced by one step and passed to later steps. |
+| **Deploy stage** | Releases the approved artifact/configuration to an environment. |
+| **IAM role** | An AWS identity assumed by a service or job to call permitted AWS APIs. |
+
+**Analogy:** A pipeline is an assembly line: source provides materials, build produces the package, tests inspect it, and deploy installs it.
+
+**Try / observe:** Trace one commit through each stage and identify the artifact, identity/role, and permissions used at every transition.
+
+**Troubleshooting clue:** A failed stage can be a source permission, build/test issue, missing artifact, or deployment authorization error. Start with the failing stage's logs.
+
+**Explain it back:** Why should a deployment job have fewer permissions than a general administrator? What is an artifact?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is CI/CD?
