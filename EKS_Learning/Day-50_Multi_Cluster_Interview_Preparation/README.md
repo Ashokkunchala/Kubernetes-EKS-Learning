@@ -9,6 +9,27 @@ By the end of today, you will:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Active-active** | Multiple sites/clusters serve traffic at the same time. |
+| **Active-passive** | One site serves normally while another is prepared to take over. |
+| **Blast radius** | How much of the system a fault can affect. |
+| **Failover** | Switching to a healthy alternate system. |
+| **Consistency** | How closely replicated data or state agrees across systems. |
+| **Federation** | Coordinating selected resources/policies across independent clusters through tooling. |
+
+**Analogy:** Active-active is two open service counters; active-passive is one open counter with a ready backup. Both need clear data ownership.
+
+**Try / observe:** Compare designs by availability, consistency, complexity, cost, recovery time, and failure isolation—not just cluster count.
+
+**Troubleshooting clue:** A second cluster does not guarantee availability if both depend on the same database, DNS, identity provider, or network.
+
+**Explain it back:** What shared dependencies can defeat a multi-cluster availability design?
+
+---
+
 ## 📖 Core Concepts - The Decision Framework
 
 ```
