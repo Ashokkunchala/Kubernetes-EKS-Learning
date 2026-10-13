@@ -10,6 +10,26 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **NetworkPolicy** | A rule describing which network connections are allowed to or from selected Pods. It is enforced only when the cluster's network plugin supports it. |
+| **Ingress / egress** | Ingress is traffic coming into a Pod; egress is traffic leaving it. |
+| **Default deny** | Start by allowing no traffic in a direction, then explicitly permit required paths. This reduces accidental exposure. |
+| **Label selector** | A filter that picks Pods by their labels; a policy affects only the Pods it selects. |
+| **Calico** | A networking and policy solution that can enforce Kubernetes NetworkPolicies, depending on deployment/configuration. |
+
+**Analogy:** NetworkPolicy is a door-access list for Pods. Labels identify which rooms the rule protects.
+
+**Try / observe:** `kubectl get networkpolicy -A`, `kubectl describe networkpolicy <name>`, and test allowed and denied paths with a disposable test Pod.
+
+**Troubleshooting clue:** A policy object existing does not prove enforcement. Confirm the CNI supports policies and inspect both source and destination policy rules.
+
+**Explain it back:** Why can a NetworkPolicy have no effect? What is the difference between ingress and egress?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is Calico?
