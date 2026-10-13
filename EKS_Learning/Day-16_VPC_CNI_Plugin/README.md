@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **CNI** | The interface Kubernetes uses to configure Pod networking. | A broken CNI can prevent Pods from receiving network access. |
+| **Amazon VPC CNI** | The EKS networking plugin that assigns VPC addresses to Pods. | Pod IP capacity depends on subnet addresses and EC2 network-interface limits/configuration. |
+| **ENI** | An Elastic Network Interface, a virtual network card in AWS. | The number and configuration of ENIs affect available Pod IP capacity. |
+| **IPAM** | IP Address Management: allocating and tracking addresses. | Address exhaustion can block Pod creation even when CPU and memory are available. |
+| **Prefix delegation** | Assigning IP address prefixes to interfaces rather than allocating every address individually. | It can improve IP allocation efficiency when correctly supported and configured. |
+| **Warm pool** | Extra IPs or network capacity kept ready for upcoming Pods. | It trades faster Pod startup against reserved address capacity. |
+
+**Analogy:** The VPC is a set of numbered seats; IPAM assigns seats, ENIs are access lanes, and prefix delegation reserves a block of seats at once.
+
+**Try / observe:** `kubectl get pods -n kube-system`, `kubectl describe node <node-name>`, and review VPC CNI logs from the `aws-node` Pods.
+
+**Troubleshooting clue:** If Pod creation reports IP allocation errors, check subnet free IPs, ENI/IP limits, CNI health, and node configuration before changing workload resources.
+
+**Explain it back:** Why can a cluster have spare CPU but still fail to create a Pod? What problem does prefix delegation address?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is VPC CNI?
