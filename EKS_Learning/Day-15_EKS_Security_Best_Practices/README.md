@@ -236,10 +236,11 @@ aws ecr put-image-scanning-configuration \
   --repository-name my-app \
   --image-scanning-configuration scanOnPush=true
 
-# Get scan findings
+# Get scan findings for a tag that exists in this repository
+# Replace <existing-tag> with the exact tag you pushed to ECR.
 aws ecr describe-image-scan-findings \
   --repository-name my-app \
-  --image-id imageTag=latest
+  --image-id imageTag=<existing-tag>
 ```
 
 ---
