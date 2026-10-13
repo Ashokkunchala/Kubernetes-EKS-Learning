@@ -9,6 +9,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Everyday meaning | Why it matters |
+|---|---|---|
+| **Ephemeral** | Something that can disappear when its container or Pod is replaced. | Data written only to a container's writable layer is not durable. |
+| **PersistentVolume (PV)** | A cluster resource representing storage made available for workloads. | It separates the app's storage request from the underlying storage resource. |
+| **PersistentVolumeClaim (PVC)** | A workload's request for a certain amount/type of persistent storage. | Pods normally use a claim rather than selecting a disk directly. |
+| **StorageClass** | A named set of storage rules, often used to create volumes dynamically. | It tells Kubernetes what kind of storage to provision. |
+| **Provisioning / binding** | Provisioning creates storage; binding connects a PVC to a PV. | A PVC that cannot be provisioned or bound can keep a Pod waiting. |
+| **Mount** | Making a filesystem available at a path inside a container. | The application must write to the mounted path to use persistent storage. |
+
+**Analogy:** A PVC is a storage request ticket; the PV is the allocated storage; the StorageClass describes what kind of storage to provide.
+
+**EKS connection:** EBS volumes are Availability-Zone-specific block storage; EFS can be shared across multiple Availability Zones. Choose based on access pattern and resilience needs.
+
+**Try / observe:** `kubectl get pvc,pv,storageclass`, `kubectl describe pvc <claim-name>`, `kubectl describe pod <pod-name>`.
+
+**Troubleshooting clue:** PVC `Pending` means storage has not been successfully allocated/bound yet. Check the PVC Events, StorageClass, provisioner/CSI driver, capacity, and zone constraints.
+
+**Explain it back:** Why should app data not live only in a container's writable layer? What is the difference between a PV and a PVC?
+
+---
+
 ## 📖 Core Concepts
 
 ### The Problem: Ephemeral Storage
