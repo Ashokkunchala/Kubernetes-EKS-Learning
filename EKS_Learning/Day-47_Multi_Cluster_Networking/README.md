@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Multi-cluster** | Running workloads across more than one Kubernetes cluster. |
+| **Federation** | Coordinating resources or policy across separate clusters; the exact capability depends on the tooling. |
+| **Service discovery** | Finding a service's current network endpoint by a stable name or registry. |
+| **East-west traffic** | Traffic between services/workloads, as opposed to north-south traffic entering or leaving the platform. |
+| **Service mesh** | A layer that can provide service-to-service identity, routing, security, and telemetry. |
+| **DNS** | The naming system that maps names to network records. |
+
+**Analogy:** Each cluster is a separate office. Multi-cluster networking is how offices reach each other without assuming they share one internal network.
+
+**Try / observe:** Draw source cluster → network path → destination cluster and mark DNS, routing, firewall, identity, and service-discovery dependencies.
+
+**Troubleshooting clue:** A service name may resolve inside one cluster but not another. Check DNS scope, network reachability, destination exposure, and identity policy separately.
+
+**Explain it back:** What is the difference between running two clusters and federating them?
+
+---
+
 ## 📖 Core Concepts
 
 ### Multi-Cluster Topologies
