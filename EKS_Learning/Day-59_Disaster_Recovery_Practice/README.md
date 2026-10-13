@@ -16,6 +16,27 @@ By the end of today, you will be able to:
 Prerequisites: Everything from **Day 56** (backup), **Day 57** (cross-region replication), and **Day 58** (failover procedures).
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Game day** | A planned exercise that simulates a failure to test people, tools, and recovery steps. |
+| **Recovery objective** | The agreed target for recovery time (RTO) and acceptable data loss (RPO). |
+| **Dependency** | Another system or service required for the application to work, such as DNS, identity, database, or registry. |
+| **Restore test** | Proving a backup can recreate usable service, not just that a backup job succeeded. |
+| **Evidence** | Logs, timestamps, commands, outputs, and measurements showing what happened. |
+| **Postmortem** | A learning-focused review of an incident/exercise, including causes and follow-up actions. |
+
+**Analogy:** A fire drill is useful only if people practise the exit and verify they can reach safety; a game day tests the real recovery path.
+
+**Try / observe:** Record start time, detection time, recovery time, data loss, blockers, and follow-up owners. Use a sandbox and define a stop condition before injecting failure.
+
+**Troubleshooting clue:** If recovery misses the target, separate technology gaps (missing backup/capacity) from process gaps (unclear owner, stale runbook, untested credentials).
+
+**Explain it back:** What evidence proves that a recovery exercise succeeded?
+
+---
+
 
 ## 🖥️ Project: The 3-Hour DR Game Day
 
