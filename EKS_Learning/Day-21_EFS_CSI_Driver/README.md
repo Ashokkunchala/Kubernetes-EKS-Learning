@@ -31,6 +31,8 @@ By the end of today, you will understand:
 
 ---
 
+> **Lab credential safety:** These examples use a placeholder, not a usable password. Before running a database lab, replace `REPLACE_WITH_STRONG_LAB_PASSWORD` in the manifest with a strong, lab-only value and set `MYSQL_ROOT_PASSWORD` to the same value in your Bash shell (for example, `export MYSQL_ROOT_PASSWORD='your-lab-only-value'`). Do not reuse real credentials or commit them to Git. For production, use a Kubernetes Secret with restricted access or an external secret manager.
+
 ## 📖 Core Concepts
 
 ### What is Amazon EFS?
@@ -309,7 +311,7 @@ spec:
         - name: WORDPRESS_DB_HOST
           value: "mysql-service"
         - name: WORDPRESS_DB_PASSWORD
-          value: "password123"
+          value: "REPLACE_WITH_STRONG_LAB_PASSWORD"
         volumeMounts:
         - name: wordpress-data
           mountPath: /var/www/html
