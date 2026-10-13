@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Jenkins controller** | The service that hosts Jenkins configuration, schedules work, and coordinates agents. |
+| **Agent** | A worker environment that executes pipeline steps. |
+| **Pipeline** | The defined sequence of build, test, scan, and delivery steps. |
+| **Credential** | A protected authentication value such as a token, password, or key. |
+| **RBAC** | Rules controlling which Kubernetes API operations an identity can perform. |
+| **Ephemeral agent** | A temporary worker created for a job and removed afterward. |
+
+**Analogy:** The controller is the dispatcher; agents are workstations. Ephemeral agents are cleaned up after a job to reduce leftover state.
+
+**Try / observe:** Identify where the controller runs, where jobs execute, which ServiceAccount the agent uses, and which secrets are mounted or injected.
+
+**Troubleshooting clue:** If a pipeline cannot access the Kubernetes API, verify the agent's identity and RBAC separately from Jenkins credentials and network reachability.
+
+**Explain it back:** Why should the Jenkins controller and build agents be treated as different responsibilities? Why use ephemeral agents?
+
+---
+
 ## 📖 Core Concepts
 
 ### Jenkins Architecture on EKS
