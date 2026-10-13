@@ -221,7 +221,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: my-api:latest
+        image: my-api:v1.0.0
         ports:
         - containerPort: 8080
 ---
