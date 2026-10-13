@@ -120,7 +120,8 @@ kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.pas
 
 # If using Helm, set your own password via argocd CLI
 kubectl port-forward svc/argocd-server -n argocd 8080:443
-argocd login localhost:8080 --username admin --password <password>
+argocd login localhost:8080 --username admin
+# Enter the password at the interactive prompt; do not put it in the command.
 argocd account update-password
 ```
 
@@ -165,8 +166,8 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443 &
 # In production, configure a trusted TLS certificate and omit --insecure.
 argocd login localhost:8080 \
   --username admin \
-  --password <password> \
   --insecure
+# Enter the password at the interactive prompt.
 ```
 
 ### Step 2: Add Git Repository
