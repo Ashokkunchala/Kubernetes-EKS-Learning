@@ -112,10 +112,10 @@ By the end of today, you will understand:
 │  │  Amazon EKS                                      │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
 │  │  │  ✅ Managed control plane                │   │   │
-│  │  │  ✅ Automatic updates                    │   │   │
+│  │  │  ✅ AWS-managed control plane             │   │   │
 │  │  │  ✅ High availability built-in           │   │   │
 │  │  │  ✅ AWS IAM integration                  │   │   │
-│  │  │  ✅ Compliance (SOC, PCI, HIPAA)         │   │   │
+│  │  │  ✅ AWS compliance program support       │   │   │
 │  │  │  ✅ AWS support                           │   │   │
 │  │  │  ❌ Per-cluster hourly fee applies        │   │   │
 │  │  │  ❌ Less control over control plane      │   │   │
@@ -394,13 +394,13 @@ kubectl version --client
    - **Answer:** Amazon EKS is a managed Kubernetes service that makes it easy to run Kubernetes on AWS. It manages the control plane and integrates with AWS services.
 
 2. **How does EKS differ from self-managed Kubernetes?**
-   - **Answer:** EKS manages the control plane (API server, etcd, scheduler), provides automatic updates, high availability, and AWS integration. Self-managed requires you to manage everything.
+   - **Answer:** EKS operates the managed control plane and integrates with AWS. Cluster version upgrades are planned and initiated by the customer; AWS manages the underlying control-plane infrastructure. Self-managed Kubernetes requires you to operate the control plane too.
 
 3. **What is the cost structure of EKS?**
    - **Answer:** EKS has a per-cluster hourly fee that depends on Kubernetes version support tier (standard or extended). Worker compute, storage, IP addresses, and data transfer are charged separately. Check the [official EKS pricing page](https://aws.amazon.com/eks/pricing/) before estimating costs.
 
 4. **What are the benefits of using EKS?**
-   - **Answer:** Managed control plane, high availability, AWS IAM integration, compliance certifications, automatic updates, and AWS support.
+   - **Answer:** Managed control plane, high availability, AWS integrations, and support. Compliance is a shared responsibility: using EKS does not automatically make an application compliant.
 
 5. **What types of worker nodes does EKS support?**
    - **Answer:** Managed Node Groups, Self-Managed Node Groups, and Fargate (serverless).
@@ -411,7 +411,7 @@ kubectl version --client
    - **Answer:** EKS operates a highly available managed control plane across multiple Availability Zones. Review the current [EKS Service Level Agreement](https://aws.amazon.com/eks/sla/) for the precise commitment and conditions. Application availability still depends on workload replicas, node capacity, networking, and dependencies.
 
 7. **What is the difference between Managed and Self-Managed Node Groups?**
-   - **Answer:** Managed Node Groups are managed by AWS (automatic updates, scaling). Self-Managed gives you more control but requires manual management.
+   - **Answer:** AWS manages several node-group lifecycle operations, but node and AMI upgrades still need a planned rollout/configuration. Self-managed nodes offer more control and require more direct operational work.
 
 8. **How does EKS integrate with AWS IAM?**
    - **Answer:** EKS uses IAM for cluster authentication, node permissions, and IRSA (IAM Roles for Service Accounts) for pod-level permissions.
