@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning in everyday language | Why it matters |
+|---|---|---|
+| **Namespace** | A logical grouping of Kubernetes objects inside one cluster. | It helps organise teams and environments and is a scope for many names and permissions; it is not a complete security boundary by itself. |
+| **ConfigMap** | A Kubernetes object for non-secret configuration such as a feature flag or URL. | Configuration can change separately from the container image. |
+| **Secret** | A Kubernetes object intended for sensitive values such as passwords or tokens. | Access must be restricted; base64 representation is not encryption. |
+| **Environment variable** | A named value passed into a process when it starts. | Apps commonly read settings this way, but changes usually require restarting the process/Pod to take effect. |
+| **Volume mount** | A path inside a container connected to storage or injected files. | It can expose ConfigMap/Secret values as files rather than environment variables. |
+| **RBAC** | Role-Based Access Control: rules that decide which identity may perform which Kubernetes actions. | A user who can read Pods should not automatically be allowed to read Secrets. |
+
+**Analogy:** A Namespace is a labelled room, a ConfigMap is a noticeboard, and a Secret is a locked envelope whose access must be controlled.
+
+**EKS connection:** Kubernetes Secret access is governed by Kubernetes permissions and cluster configuration. For AWS-managed secrets, use an intentional integration and least-privilege IAM permissions.
+
+**Try / observe:** `kubectl get namespaces`, `kubectl get configmaps,secrets -n <namespace>`, `kubectl describe pod <pod-name> -n <namespace>`. Avoid printing real secret values into terminals, logs, or Git.
+
+**Troubleshooting clue:** A Pod may fail when a referenced ConfigMap/Secret name is wrong or the object is in a different Namespace. Namespaced objects must be looked up in the correct Namespace.
+
+**Explain it back:** What belongs in a ConfigMap versus a Secret? Why does base64 not make a value secret?
+
+---
+
 ## 📖 Core Concepts
 
 ### What are Namespaces?
