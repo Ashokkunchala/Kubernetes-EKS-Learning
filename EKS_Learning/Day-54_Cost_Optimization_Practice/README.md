@@ -9,6 +9,27 @@ By the end of today, you will:
 - Quantify savings and monitor cost per workload
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Unit cost** | Cost per useful unit, such as per request, transaction, or customer. |
+| **Utilization** | How much of provisioned capacity is actually used. |
+| **Right-sizing** | Matching resource requests and infrastructure capacity to observed workload demand. |
+| **Spot capacity** | Discounted EC2 capacity that can be reclaimed by AWS. |
+| **Savings Plans** | AWS pricing commitments that can reduce eligible compute costs in exchange for a usage commitment. |
+| **Cost allocation tag** | A tag used to group/report AWS costs by team, service, or environment. |
+
+**Analogy:** Optimisation is not simply buying cheaper supplies; it is measuring cost per useful result while maintaining reliability.
+
+**Try / observe:** Compare cost with utilization and service-level objectives before changing capacity. Tag resources consistently and verify the cost reports are attributing spend correctly.
+
+**Troubleshooting clue:** A lower monthly bill can hide worse latency or reliability. Compare cost, performance, and availability together.
+
+**Explain it back:** Why is cost per request more useful than total cost alone for a growing service?
+
+---
+
 
 ## 📖 The Full Toolkit
 
