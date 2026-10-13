@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **Authentication (AuthN)** | Proving which identity is making a request. | A system must know who or what is calling before it evaluates permissions. |
+| **Authorization (AuthZ)** | Deciding what an authenticated identity is allowed to do. | Knowing who you are does not mean you can perform every action. |
+| **IAM role** | An AWS identity with permissions that a trusted principal can assume. | It allows temporary credentials without embedding long-lived keys in applications. |
+| **IAM policy** | A JSON document describing allowed or denied AWS actions on resources under conditions. | It defines what an identity can do in AWS APIs. |
+| **Trust policy** | The role's policy defining which principals may assume the role. | A permissions policy does not by itself decide who can assume a role. |
+| **Kubernetes RBAC** | Kubernetes permissions expressed through Roles/ClusterRoles and bindings. | AWS IAM permissions and Kubernetes API permissions are not interchangeable. |
+
+**Analogy:** Authentication is showing your ID; authorization is checking which rooms your badge can open. An IAM role's trust policy decides who may borrow the badge.
+
+**EKS connection:** EKS access has multiple layers: AWS identity, EKS cluster access configuration, and Kubernetes RBAC where applicable. Diagnose the exact denied API before changing broad permissions.
+
+**Try / observe:** `aws sts get-caller-identity`, `kubectl auth can-i get pods -n default`, `kubectl auth can-i get secrets -n default`.
+
+**Troubleshooting clue:** `Unauthorized` often points to identity/authentication; `Forbidden` usually means the request reached authorization but lacks permission. Check AWS IAM and Kubernetes RBAC separately.
+
+**Explain it back:** What is the difference between an IAM trust policy and a permissions policy? How do AuthN and AuthZ differ?
+
+---
+
 ## 📖 Core Concepts
 
 ### IAM Roles Architecture
