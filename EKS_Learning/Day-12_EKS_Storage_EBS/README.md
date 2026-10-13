@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **Amazon EBS** | Block storage volumes used like disks, commonly attached to EC2 instances. | It is a common fit for a workload needing durable, single-node-attached block storage. |
+| **CSI driver** | A plugin that lets Kubernetes communicate with a storage system through the Container Storage Interface. | Kubernetes needs a driver to provision, attach, and mount AWS storage. |
+| **PV / PVC** | A PV represents storage; a PVC is a workload's request for storage. | Pods consume storage through claims rather than manually selecting AWS volume IDs. |
+| **StorageClass** | A named storage profile describing how volumes should be provisioned. | It can specify parameters such as volume type and provisioning behavior. |
+| **Availability Zone (AZ)** | An isolated location within an AWS Region. | EBS volumes are tied to an AZ, so a Pod may not be schedulable in a different AZ from its volume. |
+| **Dynamic provisioning** | Creating a storage volume automatically when a claim requests it. | It avoids manually creating and matching every volume. |
+
+**Analogy:** The PVC is a disk request, the CSI driver is the translator to AWS, and EBS is the disk AWS provides.
+
+**Try / observe:** `kubectl get pvc,pv,storageclass`, `kubectl describe pvc <claim-name>`, `kubectl get pods -o wide`.
+
+**Troubleshooting clue:** Check PVC Events and the EBS CSI controller/node Pods when claims or mounts fail. Also inspect AZ placement and IAM permissions for the driver.
+
+**Explain it back:** Why does EBS need a CSI driver in Kubernetes? Why can AZ placement matter for a Pod using EBS?
+
+---
+
 ## 📖 Core Concepts
 
 ### EBS CSI Driver Architecture
