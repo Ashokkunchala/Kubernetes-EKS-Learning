@@ -156,6 +156,14 @@
 
 ---
 
+## 🧠 Understand the words before the commands
+
+Every Day 1–60 lesson now starts with a **Plain-English terms before you start** section. Each section defines the lesson's key vocabulary, explains why it matters, uses a simple analogy, connects it to Kubernetes/EKS where relevant, and gives safe inspection commands, troubleshooting clues, and a short explain-it-back question.
+
+Recommended study loop: **read the vocabulary → explain it in your own words → run the inspection command → observe the result → investigate one failure mode → answer the question without notes.** If a term still feels unclear, use [the plain-English concepts guide](KUBERNETES_EKS_CONCEPTS_PLAIN_ENGLISH.md) and [the flexible study workflow](UNDERSTANDING_FIRST_STUDY_WORKFLOW.md).
+
+---
+
 ## 🛠️ How to Use This Library
 
 1. **Follow sequentially** — Days 1–60 build on each other; each file ends with
