@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **AWS Region** | A geographic area containing multiple Availability Zones. |
+| **Replication** | Copying data or configuration from one location to another, often continuously or periodically. |
+| **Replication lag** | The delay between a change at the source and its availability at the destination. |
+| **RPO** | Recovery Point Objective: how much recent data loss, measured in time, is acceptable. |
+| **RTO** | Recovery Time Objective: how long restoring service is allowed to take. |
+| **Failover** | Switching service to a prepared alternate location/system. |
+
+**Analogy:** Replication keeps a second copy of a notebook; lag is how far behind it is, RPO is the acceptable missing pages, and RTO is how long it takes to resume writing.
+
+**Try / observe:** Verify that data and images are actually replicated, credentials and networking work in the destination Region, and restore/failover steps are tested.
+
+**Troubleshooting clue:** A replicated resource does not guarantee an application is recoverable. Check dependencies, secret availability, capacity, DNS, and the data replication state.
+
+**Explain it back:** How do RPO and RTO differ? Why must cross-Region recovery be tested end to end?
+
+---
+
 ## 📖 Core Concepts
 
 ### RPO / RTO
