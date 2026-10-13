@@ -154,7 +154,7 @@ managedNodeGroups:
   minSize: 2
 ```
 
-Or roll to a better-size with zero downtime via a new node group labeled correctly:
+Or roll to a better-sized node group to reduce disruption. **Zero downtime is not guaranteed**: maintain sufficient replicas, PodDisruptionBudgets, capacity, readiness checks, and a tested drain/rollback plan.
 
 ```bash
 # Create a new sized node group, then drain old one
