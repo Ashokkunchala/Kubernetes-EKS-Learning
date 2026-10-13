@@ -128,8 +128,10 @@ Use the official K8s dashboards. In Grafana: **+ → Import** → enter ID → p
 | Kubernetes Deployment | 13946 | Deployment health |
 
 ```bash
-# Or import via Grafana API
-curl -X POST http://admin:ChangeMe!@localhost:3000/api/dashboards/db \
+# Or import via Grafana API (local lab only).
+# Set GRAFANA_ADMIN_PASSWORD in your shell; never commit a real password.
+curl --user "admin:${GRAFANA_ADMIN_PASSWORD}" \
+  -X POST http://localhost:3000/api/dashboards/db \
   -H "Content-Type: application/json" \
   -d @dashboard.json
 ```
