@@ -87,10 +87,12 @@ helm repo update
 
 kubectl create ns monitoring
 
+read -s -p "Lab-only Grafana admin password: " GRAFANA_ADMIN_PASSWORD; echo
 helm install kube-prometheus prometheus-community/kube-prometheus-stack \
   --namespace monitoring \
-  --set grafana.adminPassword='ChangeMe!' \
+  --set grafana.adminPassword="$GRAFANA_ADMIN_PASSWORD" \
   --set prometheus.prometheusSpec.storageSpec.volumeClaimTemplate.spec.resources.requests.storage=50Gi
+unset GRAFANA_ADMIN_PASSWORD
 ```
 
 ### Verify Components
@@ -105,7 +107,7 @@ Port-forward to the UIs:
 
 ```bash
 kubectl -n monitoring port-forward svc/kube-prometheus-grafana 3000:80
-# Grafana: http://localhost:3000  (admin / ChangeMe!)
+# Grafana: http://localhost:3000 (username: admin; use the password entered above)
 
 kubectl -n monitoring port-forward svc/kube-prometheus-prometheus 9090:9090
 # Prometheus UI: http://localhost:9090
