@@ -10,6 +10,29 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Everyday meaning | Why it matters |
+|---|---|---|
+| **CNI (Container Network Interface)** | The plugin interface used to configure networking for Pods. | Without a working network plugin, Pods may not receive usable networking. |
+| **Pod IP** | The cluster-network address of a Pod. | It can change when a Pod is replaced. |
+| **CoreDNS** | The DNS service commonly used by Kubernetes to resolve Service names. | Apps use names such as `api.default.svc` instead of hard-coded IPs. |
+| **kube-proxy** | A component that implements Service networking rules on many clusters. | Broken Service routing can make healthy Pods unreachable through a Service. |
+| **Ingress** | A Kubernetes API object describing HTTP/HTTPS routing into a cluster. | It requires an Ingress controller to implement the rules. |
+| **Network path** | The sequence of network components traffic crosses from client to destination. | Debugging works best by checking each hop rather than guessing. |
+
+**Analogy:** DNS is the contact list, a Service is the stable contact, and the CNI is the road system connecting Pods.
+
+**EKS connection:** The Amazon VPC CNI assigns Pod addresses from VPC networking. Security groups, routes, DNS, and Kubernetes policies can each affect connectivity.
+
+**Try / observe:** `kubectl get pods -A -o wide`, `kubectl get svc,endpointslices -A`, `kubectl get pods -n kube-system`.
+
+**Troubleshooting clue:** If a Service name does not resolve, check CoreDNS Pods and DNS configuration. If the name resolves but traffic fails, check Service endpoints, Pod readiness, policies, security groups, and routes.
+
+**Explain it back:** What does CNI do? Why is an Ingress object alone not enough to route traffic?
+
+---
+
 ## 📖 Core Concepts
 
 ### Kubernetes Networking Model
