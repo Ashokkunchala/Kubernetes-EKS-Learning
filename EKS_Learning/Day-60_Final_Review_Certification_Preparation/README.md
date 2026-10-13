@@ -14,6 +14,27 @@ By the end of today, you will be able to:
 > operate, and troubleshoot EKS in production.
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Desired state** | The configuration you want the system to maintain. |
+| **Least privilege** | Giving each identity only the permissions needed for its task. |
+| **Observability** | Understanding system behavior from metrics, logs, traces, and other evidence. |
+| **RTO / RPO** | RTO is the target time to recover; RPO is the acceptable amount of data loss measured in time. |
+| **Capstone** | A larger end-to-end project that combines skills from multiple lessons. |
+| **Operational readiness** | Evidence that a system can be deployed, monitored, secured, troubleshot, and recovered by its operators. |
+
+**Analogy:** Certification checks whether you know the tools; a production capstone checks whether you can choose the right tool, prove it works, and recover when it fails.
+
+**Try / observe:** For every major domain, explain the concept without notes, run a relevant command, identify one likely failure, and demonstrate how you would verify recovery.
+
+**Troubleshooting clue:** A green deployment status is not the same as a healthy service. Check user-facing behavior, dependencies, metrics/logs, security boundaries, and rollback/recovery readiness.
+
+**Explain it back:** What evidence would convince you that an EKS platform is production-ready rather than merely deployed?
+
+---
+
 
 ## 🗺️ The 60-Day Journey at a Glance
 
