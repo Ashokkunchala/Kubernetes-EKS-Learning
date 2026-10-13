@@ -9,6 +9,27 @@ By the end of today, you will:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Continuous Integration (CI)** | Frequently integrating changes and automatically building/testing them. |
+| **Continuous Delivery** | Keeping software in a releasable state; production release may require approval. |
+| **Continuous Deployment** | Automatically releasing every change that passes the required checks to production. |
+| **Artifact** | A versioned output such as a container image or package. |
+| **Immutable tag/digest** | An image identifier that cannot silently point to a different build; a digest identifies exact content. |
+| **Promotion** | Moving the same tested artifact through environments rather than rebuilding different content for each one. |
+
+**Analogy:** CI checks each new part, delivery prepares a releasable product, and deployment automatically puts approved changes into production.
+
+**Try / observe:** Explain your pipeline with evidence: commit → test/scan → image digest → environment approval → deployment → health verification → rollback.
+
+**Troubleshooting clue:** Separate build failures from registry access, cluster authorization, rollout health, and application failures. The failing stage tells you where to gather evidence first.
+
+**Explain it back:** What is the difference between continuous delivery and continuous deployment?
+
+---
+
 ## 📖 Core Concepts - The Big Picture
 
 ```
