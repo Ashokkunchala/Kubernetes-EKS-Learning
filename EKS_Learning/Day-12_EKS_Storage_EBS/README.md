@@ -311,7 +311,15 @@ spec:
 
 ---
 
-**Before applying this example:** create the `mysql-secret` Secret in the same Namespace using a strong lab-only password. Do not put a real password in this YAML or commit Secret manifests containing real values. In production, use a controlled secret-delivery workflow (for example, AWS Secrets Manager integration), least-privilege access, and rotation.
+**Before applying this example:** create the `mysql-secret` Secret in the same Namespace using a strong lab-only password. In Bash, set `MYSQL_ROOT_PASSWORD` and run:
+
+```bash
+read -s -p "Lab-only MySQL root password: " MYSQL_ROOT_PASSWORD; echo
+kubectl create secret generic mysql-secret --from-literal=MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD"
+unset MYSQL_ROOT_PASSWORD
+```
+
+Do not put a real password in this YAML or commit Secret manifests containing real values. In production, use a controlled secret-delivery workflow (for example, AWS Secrets Manager integration), least-privilege access, and rotation.
 
 ## 📝 Interview Questions
 
