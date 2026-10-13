@@ -392,7 +392,7 @@ With Kubernetes:
 │             EXAMPLE APPLICATION ARCHITECTURE              │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │              Netflix Architecture                │   │
+│  │          Example Application Architecture         │   │
 │  │                                                   │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
 │  │  │  User Request                            │   │   │
