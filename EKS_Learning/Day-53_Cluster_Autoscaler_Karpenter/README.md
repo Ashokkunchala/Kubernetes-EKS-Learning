@@ -112,7 +112,8 @@ export KARPENTER_VERSION="<compatible-version>"
 export KARPENTER_IAM_ROLE_ARN="<karpenter-controller-role-arn>"
 
 # Prerequisites: controller IAM permissions, node IAM role, subnet/security-group
-# discovery tags, and (if using interruption handling) SQS/EventBridge configuration.
+# discovery tags, and the SQS queue/EventBridge rules used for interruption handling.
+# This command sets settings.interruptionQueue, so create/configure that queue first.
 helm upgrade --install karpenter oci://public.ecr.aws/karpenter/karpenter \
   --version "$KARPENTER_VERSION" \
   --namespace karpenter --create-namespace \
