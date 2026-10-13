@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Federation** | Coordinating selected configuration or policies across multiple independent clusters. |
+| **Fleet** | A group of clusters managed with common standards or tooling. |
+| **Placement** | The decision about which cluster should host a workload. |
+| **Policy** | A rule that defines required or permitted behavior. |
+| **Failure domain** | A boundary within which one fault may affect multiple components, such as one AZ or cluster. |
+| **Blast radius** | The scope of damage or disruption caused by a failure or mistake. |
+
+**Analogy:** A fleet manager coordinates several independent sites; it does not turn every site into one giant cluster.
+
+**Try / observe:** Document what is centralised and what remains cluster-local, plus what happens if the management system becomes unavailable.
+
+**Troubleshooting clue:** A cross-cluster rollout can fail because of target-cluster credentials, API reachability, policy mismatch, or placement rules. Diagnose the target cluster explicitly.
+
+**Explain it back:** Why can separate clusters reduce blast radius? What new complexity does multi-cluster management introduce?
+
+---
+
 ## 📖 Core Concepts
 
 ### Federation Model
