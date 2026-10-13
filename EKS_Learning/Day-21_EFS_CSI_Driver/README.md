@@ -138,11 +138,14 @@ SG_ID=$(aws ec2 create-security-group \
   --output text)
 echo $SG_ID
 
-# Allow NFS from VPC
+# Allow NFS only from the EKS worker/node security group, not the public internet.
+# Set NODE_SG_ID to the security group used by worker nodes that need EFS access.
 aws ec2 authorize-security-group-ingress \
-  --group-id $SG_ID \
+  --group-id "$SG_ID" \
   --protocol tcp --port 2049 \
-  --cidr 0.0.0.0/0
+  --source-group "$NODE_SG_ID"
+
+# Never expose EFS NFS (TCP 2049) to 0.0.0.0/0.
 
 # Create EFS
 FS_ID=$(aws efs create-file-system \
