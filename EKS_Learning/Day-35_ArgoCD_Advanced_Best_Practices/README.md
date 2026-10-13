@@ -365,7 +365,7 @@ kubectl get secrets -n argocd -l 'app.kubernetes.io/managed-by=argocd.argoproj.i
 
 ### Automate with CronJob
 
-**Prerequisites and limits:** Create the argocd-backup-pvc PVC and a least-privilege argocd-backup-sa/RBAC binding before applying this example. This job saves selected Argo CD resources to a persistent volume; it is not a complete disaster-recovery backup. Copy the files off-cluster (for example, to a versioned S3 bucket) and test restoration regularly.
+**Prerequisites and limits:** Replace the kubectl image version with a tested version compatible with your cluster. Create the argocd-backup-pvc PVC and a least-privilege argocd-backup-sa/RBAC binding before applying this example. This job saves selected Argo CD resources to a persistent volume; it is not a complete disaster-recovery backup. Copy the files off-cluster (for example, to a versioned S3 bucket) and test restoration regularly.
 
 ```yaml
 # argocd-backup-cron.yaml
