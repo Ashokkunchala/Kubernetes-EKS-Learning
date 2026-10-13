@@ -126,7 +126,8 @@ kind: EC2NodeClass
 metadata:
   name: default
 spec:
-  amiFamily: AL2
+  amiSelectorTerms:
+  - alias: al2023@latest
   role: "KarpenterNodeRole-my-cluster"
   subnetSelectorTerms:
   - tags:
@@ -138,7 +139,7 @@ spec:
 
 ```yaml
 # nodepool.yaml - requirements + limits
-apiVersion: karpenter.sh/v1beta1
+apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: default
@@ -146,6 +147,8 @@ spec:
   template:
     spec:
       nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
         name: default
       requirements:
       - key: kubernetes.io/arch
