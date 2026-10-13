@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Workload identity** | The identity an application uses when it calls another system. |
+| **EKS Pod Identity** | An EKS mechanism for associating Kubernetes ServiceAccounts with AWS IAM roles for workloads. |
+| **IRSA** | An alternative workload-identity approach using the cluster OIDC provider and IAM role trust. |
+| **Credential provider chain** | The ordered ways an AWS SDK/CLI tries to discover credentials. |
+| **Temporary credentials** | Short-lived credentials that expire and are refreshed through a trusted mechanism. |
+| **Least privilege** | Limit the role to only the actions/resources the application needs. |
+
+**Analogy:** Do not give every employee the master key. Issue each application its own time-limited badge with only the doors it needs.
+
+**Try / observe:** Confirm the Pod's ServiceAccount, the selected identity mechanism, and the AWS caller identity from inside a safe test workload. Never print secret keys or session tokens.
+
+**Troubleshooting clue:** Check that the required EKS Pod Identity Agent/add-on and association or IRSA trust configuration exist, then verify role permissions and SDK support.
+
+**Explain it back:** Why is a Pod identity safer than embedding AWS access keys in a container image?
+
+---
+
 ## 📖 Core Concepts
 
 ### Pod-Level vs Node-Level Permissions
