@@ -10,6 +10,27 @@ By the end of today, you will:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Argo CD** | A GitOps continuous-delivery tool that watches Git and reconciles Kubernetes resources. |
+| **repo-server** | Argo CD component that retrieves repositories and renders source configuration such as Helm/Kustomize. |
+| **application controller** | Component that compares desired and live resources and performs reconciliation. |
+| **Application** | An Argo CD custom resource describing a source repository/path and a destination cluster/Namespace. |
+| **Namespace** | A logical grouping of namespaced Kubernetes objects. |
+| **Repository credentials** | Credentials Argo CD uses to read a private source repository. Store and scope them carefully. |
+
+**Analogy:** repo-server fetches and prepares the blueprint; the controller checks the live building and coordinates changes.
+
+**Try / observe:** `kubectl get pods -n argocd`, `kubectl get applications -n argocd`, `kubectl describe application <app-name> -n argocd`.
+
+**Troubleshooting clue:** If an Application cannot load its source, check repository URL/credentials and rendering errors. If source loads but sync fails, check destination access, RBAC, and resource validation.
+
+**Explain it back:** What is the responsibility of repo-server versus the application controller?
+
+---
+
 ## 📖 Core Concepts
 
 ### ArgoCD Components
