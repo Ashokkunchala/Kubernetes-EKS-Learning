@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Spot Instance** | EC2 capacity offered at a discount that AWS can reclaim when needed. |
+| **Interruption notice** | Advance signal, when available, that Spot capacity is about to be reclaimed. |
+| **Capacity** | The available CPU, memory, and suitable nodes needed to schedule workloads. |
+| **PodDisruptionBudget (PDB)** | A rule limiting certain voluntary disruptions to an application. |
+| **Drain** | Evicting Pods from a node so it can be maintained or removed. |
+| **On-Demand** | EC2 capacity billed without the Spot interruption model. |
+
+**Analogy:** Spot is a discounted seat that may be recalled; resilient workloads keep spare seats and can move when notified.
+
+**Try / observe:** Review PDBs, replicas, interruption handling, and fallback capacity before moving critical workloads to Spot.
+
+**Troubleshooting clue:** A PDB can block voluntary eviction but does not prevent AWS from reclaiming an instance. Design for interruption.
+
+**Explain it back:** Which workloads suit Spot? Why should critical services have enough replicas and fallback capacity?
+
+---
+
 ## 📖 Core Concepts
 
 ### Spot Pricing & Interruption
