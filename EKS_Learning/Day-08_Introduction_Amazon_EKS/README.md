@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Everyday meaning | Why it matters |
+|---|---|---|
+| **Amazon EKS** | AWS's managed Kubernetes service. | AWS operates the Kubernetes control plane; you still manage workload design and much of the worker environment. |
+| **Managed control plane** | AWS runs and maintains key Kubernetes API/control-plane components for you. | You do not log in to EKS control-plane machines like ordinary EC2 servers. |
+| **Data plane** | The capacity where application Pods actually run, such as worker nodes. | Its CPU, memory, networking, and scaling affect workload availability. |
+| **Node group** | A set of worker nodes managed together. | It provides capacity and a consistent node configuration. |
+| **kubeconfig / context** | kubeconfig stores cluster connection and credential instructions; a context selects a cluster, user, and optional Namespace. | A wrong context can send commands to the wrong cluster. |
+| **IAM** | AWS Identity and Access Management: identities, roles, and policies for AWS API access. | EKS users and workloads need a deliberate identity path; AWS IAM and Kubernetes RBAC are related but different systems. |
+
+**Analogy:** EKS is like a managed building's control room; AWS maintains that room, while you still organise the workstations and applications inside.
+
+**Try / observe:** `aws sts get-caller-identity`, `aws eks list-clusters --region <region>`, `kubectl config get-contexts`, `kubectl get nodes`.
+
+**Troubleshooting clue:** If `kubectl` reports an authentication or access error, first confirm the AWS identity and current kubeconfig context. Then distinguish identity/authentication from Kubernetes authorization.
+
+**Explain it back:** What does AWS manage in EKS, and what remains your responsibility? What is the difference between a kubeconfig context and an IAM role?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is Amazon EKS?
