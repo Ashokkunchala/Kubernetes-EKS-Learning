@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Pending Pod** | A Pod that has not yet been scheduled/started successfully. |
+| **Node provisioning** | Creating or adding worker nodes so workloads have capacity. |
+| **Cluster Autoscaler** | A tool that adjusts node-group size based on unschedulable Pods and underused nodes. |
+| **Karpenter** | A node-provisioning system that can choose and launch suitable compute capacity from workload requirements. |
+| **Consolidation** | Replacing or removing inefficiently used nodes to reduce waste. |
+| **Disruption budget** | A policy that limits certain voluntary workload disruptions during maintenance or consolidation. |
+
+**Analogy:** Pod autoscaling adds more workers to a team; node autoscaling adds more desks when the office runs out of space.
+
+**Try / observe:** `kubectl get pods -A --field-selector=status.phase=Pending`, `kubectl describe pod <pod-name>`, and inspect autoscaler/controller logs.
+
+**Troubleshooting clue:** If no node can fit a Pod, check requests, node selectors/affinity, taints/tolerations, available instance types, subnet capacity, and autoscaler permissions.
+
+**Explain it back:** How is adding replicas different from adding nodes? What triggers node provisioning?
+
+---
+
 ## 📖 Core Concepts
 
 ### The Two Approaches
