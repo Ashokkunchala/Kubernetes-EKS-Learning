@@ -96,6 +96,7 @@ spec:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
         name: default
+      expireAfter: 168h
       requirements:
       - key: karpenter.sh/capacity-type
         operator: In
@@ -104,8 +105,8 @@ spec:
         operator: In
         values: ["c", "m", "r"]
   disruption:
-    consolidationPolicy: WhenUnderutilized
-    expireAfter: 168h
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 1m
   limits:
     cpu: "64"
 ```
