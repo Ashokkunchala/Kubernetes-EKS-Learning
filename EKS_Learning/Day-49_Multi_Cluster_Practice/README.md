@@ -9,6 +9,27 @@ By the end of today, you will:
 - Test a realistic multi-cluster scenario end-to-end
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Context** | A kubeconfig selection for a cluster and identity. |
+| **Failover** | Moving traffic or workload responsibility from a failed/unavailable system to a healthy alternative. |
+| **Traffic shifting** | Changing how much traffic goes to each destination. |
+| **Observability** | Using metrics, logs, traces, and other evidence to understand system behavior. |
+| **Isolation** | Keeping access, failures, or resources in one environment from unnecessarily affecting another. |
+| **Health check** | A test used to decide whether a component can serve work. |
+
+**Analogy:** Two clusters are two sites; failover redirects customers to the backup site, and traffic shifting controls how quickly that redirect happens.
+
+**Try / observe:** Confirm the context before commands, run a harmless read-only query against each cluster, and document a tested failover and return path.
+
+**Troubleshooting clue:** Print `kubectl config current-context` and verify the expected cluster before changes. A correct command against the wrong context is still dangerous.
+
+**Explain it back:** What should be verified before failover? Why should failback be tested too?
+
+---
+
 
 ## 📖 The Lab: Two-Region Active/Active
 
