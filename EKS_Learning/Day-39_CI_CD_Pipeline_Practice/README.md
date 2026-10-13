@@ -9,6 +9,27 @@ By the end of today, you will:
 - Validate the entire pipeline with a real code change
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Build** | Turn source code into a runnable package or image. |
+| **Test** | Check whether the code behaves as expected. |
+| **Scan** | Check code/dependencies/images for known vulnerabilities or policy violations. |
+| **Push** | Upload an image or artifact to a registry/repository. |
+| **Deploy** | Make a chosen version run in the target environment. |
+| **Rollback** | Restore a previous known-good version when a release causes problems. |
+
+**Analogy:** A release line builds a product, inspects it, stores the approved package, and installs a version; each stage should produce evidence.
+
+**Try / observe:** Record the source commit, immutable image digest, test/scan results, deployment revision, and rollback command for one practice release.
+
+**Troubleshooting clue:** If the deployed code does not match the source commit, inspect image tags/digests and pipeline artifact handoff rather than assuming the build step used the intended revision.
+
+**Explain it back:** Why is an image digest more reliable for identifying an image than a mutable tag like `latest`?
+
+---
+
 
 ## 📖 Project: Full Pipeline with GitHub Actions + ArgoCD
 
