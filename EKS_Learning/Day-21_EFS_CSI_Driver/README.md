@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Amazon EFS** | Managed network file storage that multiple clients can mount concurrently. |
+| **NFS** | Network File System, a protocol for accessing files over a network. |
+| **CSI driver** | A plugin that connects Kubernetes storage operations to a storage provider. |
+| **Access point** | An EFS entry point that can apply a configured root directory and POSIX identity. |
+| **Mount target** | An EFS network endpoint in a VPC subnet through which clients connect. |
+| **Shared filesystem** | A filesystem multiple workloads can access, subject to permissions and locking/application behavior. |
+
+**Analogy:** EBS is like a disk attached to a machine; EFS is more like a shared office file server.
+
+**Try / observe:** `kubectl get pvc,pv,storageclass`, `kubectl describe pvc <claim-name>`, and inspect EFS CSI Pods and EFS mount targets.
+
+**Troubleshooting clue:** Check VPC reachability, mount-target subnets, security-group NFS rules (TCP 2049), IAM where applicable, access-point settings, and POSIX permissions.
+
+**Explain it back:** Why might you choose EFS over EBS for multiple Pods? What does the CSI driver do?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is Amazon EFS?
