@@ -171,10 +171,13 @@ kubectl exec -it <pod-name> -- ip addr show eth0
 ### Exercise 3: Update VPC CNI
 
 ```bash
-# Update to latest CNI
-eksctl create addon --name vpc-cni \
+# Inspect the installed add-on/version first. If it is already installed, update it:
+eksctl get addon --cluster my-cluster
+# Choose a version compatible with your EKS cluster, then update it explicitly:
+eksctl update addon --name vpc-cni \
   --cluster my-cluster \
-  --force
+  --version <compatible-addon-version>
+# Use `eksctl create addon` only when the add-on is not installed.
 
 # Check version
 kubectl describe daemonset aws-node -n kube-system | grep "Image:"
@@ -183,11 +186,13 @@ kubectl describe daemonset aws-node -n kube-system | grep "Image:"
 ### Exercise 4: Enable Prefix Delegation
 
 ```bash
-# Enable prefix delegation (more IPs per ENI)
+# Enable prefix delegation only after checking VPC CNI version and subnet prerequisites.
+# Prefix delegation needs suitable contiguous subnet IP prefixes and compatible instance types.
 kubectl set env daemonset aws-node -n kube-system ENABLE_PREFIX_DELEGATION=true
 
-# Restart aws-node
+# Restart aws-node after planning the change; monitor rollout and Pod IP allocation.
 kubectl rollout restart daemonset aws-node -n kube-system
+kubectl rollout status daemonset/aws-node -n kube-system
 ```
 
 ---
