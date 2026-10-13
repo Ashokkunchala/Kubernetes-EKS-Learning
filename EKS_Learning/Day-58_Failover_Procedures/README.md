@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Failover** | Switching service to a healthy alternate system after a failure or planned event. |
+| **Failback** | Returning service to the original/primary system after it is safe. |
+| **Health check** | A test used to determine whether a service or target can serve traffic. |
+| **DNS TTL** | Time-to-live: how long resolvers may cache a DNS answer before refreshing it. |
+| **Runbook** | Ordered operational instructions for a known task or incident. |
+| **Recovery point** | The data state/time to which the system is restored. |
+
+**Analogy:** Failover redirects traffic to the backup road; failback moves it back only after the original road is safe and ready.
+
+**Try / observe:** Rehearse the sequence, decision owner, traffic switch, data consistency check, validation, communications, and failback criteria in a non-production environment.
+
+**Troubleshooting clue:** DNS changes are not instantaneous everywhere because caches honor TTLs and clients may cache results independently. Validate the actual traffic path.
+
+**Explain it back:** Why is failback a separate procedure rather than simply reversing failover?
+
+---
+
 ## 📖 Core Concepts
 
 ### Failover Strategies
