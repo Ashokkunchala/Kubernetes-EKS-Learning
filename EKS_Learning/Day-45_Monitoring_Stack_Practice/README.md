@@ -9,6 +9,27 @@ By the end of today, you will:
 - Validate SLOs and incident response
 
 ---
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Signal** | A piece of evidence about system behavior; commonly metrics, logs, or traces. |
+| **Metric** | A numeric measurement tracked over time. |
+| **Log** | A record of an event or message. |
+| **Trace** | A connected timeline of a request across components. |
+| **Alert threshold** | A value/condition beyond which an alert may fire. |
+| **Runbook** | Step-by-step instructions for investigating and responding to a known operational condition. |
+
+**Analogy:** Monitoring is the smoke detector; an alert is the alarm, and the runbook tells the responder what to check safely.
+
+**Try / observe:** For every alert, identify the symptom, user impact, evidence source, first safe check, escalation path, and recovery verification.
+
+**Troubleshooting clue:** Avoid increasing thresholds just to silence noise until you know whether the alert is false, poorly tuned, or showing a real incident.
+
+**Explain it back:** What makes an alert actionable? Why should an alert have a runbook or clear next step?
+
+---
+
 
 ## 📖 The Complete Observability Stack
 
