@@ -6,7 +6,7 @@ By the end of today, you will understand:
 - Key differences: provisioning, instance selection, and speed
 - Setting up both on EKS
 - When to choose CA vs Karpenter
-- Modern best practices (Karpenter is default for new clusters)
+- Current trade-offs and operational responsibilities for Cluster Autoscaler, Karpenter, and EKS Auto Mode
 
 ---
 
@@ -49,10 +49,10 @@ By the end of today, you will understand:
 │                                                               │
 │  ┌─────────────────────────────────────────────────────┐     │
 │  │  KARPENTER                                          │     │
-│  │  · schedules pods DIRECTLY onto optimal instances   │     │
+│  │  · provisions nodes for unschedulable Pods          │     │
 │  │  · provisions/terminates nodes as needed (jobs)     │     │
 │  │  · picks instance types from spec (flexible)        │     │
-│  │  · fast (< 1 min) + consolidates to save cost       │     │
+│  │  · can provision quickly; timing varies             │     │
 │  └─────────────────────────────────────────────────────┘     │
 └───────────────────────────────────────────────────────────────┘
 ```
@@ -64,12 +64,12 @@ By the end of today, you will understand:
 | Unit of scaling | Node group | Individual node |
 | Instance selection | From node group | From requirements |
 | Node types | Pre-set | Any in spec |
-| Speed | Slower (group-based) | Faster (direct) |
+| Speed | Depends on node-group/capacity | Can provision directly; actual timing varies |
 | Consolidation | Limited | Automatic |
 | Spot | Via node group | Mixed/spot from spec |
 | Multi-AZ | Per node group | Chosen optimally |
 | Complexity | Nodes + ASG | One controller |
-| Status | Maintained | AWS-managed, default-recommended |
+| Status | Maintained | Open-source controller you operate; EKS Auto Mode is a separate managed option |
 
 ---
 
@@ -106,14 +106,19 @@ kubectl -n kube-system logs -f deployment/cluster-autoscaler
 ### Install
 
 ```bash
-helm repo add karpenter https://charts.karpenter.sh
-helm repo update
+# Set these to a compatible Karpenter release and your actual cluster/role names.
+export CLUSTER_NAME="my-cluster"
+export KARPENTER_VERSION="<compatible-version>"
+export KARPENTER_IAM_ROLE_ARN="<karpenter-controller-role-arn>"
 
-helm upgrade --install karpenter karpenter/karpenter \
+# Prerequisites: controller IAM permissions, node IAM role, subnet/security-group
+# discovery tags, and (if using interruption handling) SQS/EventBridge configuration.
+helm upgrade --install karpenter oci://public.ecr.aws/karpenter/karpenter \
+  --version "$KARPENTER_VERSION" \
   --namespace karpenter --create-namespace \
-  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=<karpenter-role> \
-  --set settings.clusterName=my-cluster \
-  --set settings.interruptionQueue=my-cluster \
+  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"="$KARPENTER_IAM_ROLE_ARN" \
+  --set settings.clusterName="$CLUSTER_NAME" \
+  --set settings.interruptionQueue="$CLUSTER_NAME" \
   --set controller.resources.requests.cpu=300m
 ```
 
@@ -173,9 +178,9 @@ kubectl apply -f ec2nodeclass.yaml -f nodepool.yaml
 ```
 
 Now Karpenter:
-- Provisions nodes to fit pending pods (can choose `c7i`, `m7i`, etc. optimally).
-- **Consolidates** underutilized nodes to cheaper/fewer instances.
-- Handles **interruption** (spot rebalance) automatically.
+- Provisions eligible nodes to fit unschedulable Pods, based on the NodePool constraints and available capacity.
+- **Consolidates** eligible underutilized nodes when the disruption policy and workload constraints allow it.
+- Can respond to Spot interruption notices when the interruption queue and required event/permission configuration are correctly set.
 
 ---
 
