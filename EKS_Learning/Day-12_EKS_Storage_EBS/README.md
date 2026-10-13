@@ -296,7 +296,10 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "password123"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
@@ -307,6 +310,8 @@ spec:
 ```
 
 ---
+
+**Before applying this example:** create the `mysql-secret` Secret in the same Namespace using a strong lab-only password. Do not put a real password in this YAML or commit Secret manifests containing real values. In production, use a controlled secret-delivery workflow (for example, AWS Secrets Manager integration), least-privilege access, and rotation.
 
 ## 📝 Interview Questions
 
