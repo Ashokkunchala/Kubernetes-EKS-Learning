@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Workflow** | A YAML-defined automation that runs when a configured event occurs. |
+| **Runner** | The machine/environment that executes workflow jobs. |
+| **Job / step** | A job is a unit of work on a runner; steps are the commands/actions inside it. |
+| **OIDC federation** | A trust mechanism that lets a workflow exchange a signed identity token for temporary AWS credentials. |
+| **Artifact** | A file or package produced by a job and passed to another job or retained for review. |
+| **Deployment environment** | A target such as dev, staging, or production, often with different approval and credential rules. |
+
+**Analogy:** GitHub Actions is the workflow recipe, the runner is the workbench, and OIDC is a temporary visitor pass to AWS.
+
+**Try / observe:** Inspect workflow triggers, permissions, job dependencies, and AWS role trust. Grant only the token permissions and AWS actions required.
+
+**Troubleshooting clue:** If AWS credentials cannot be obtained, compare workflow OIDC permissions, role trust conditions, repository/branch/environment claims, and the AWS role ARN.
+
+**Explain it back:** Why is OIDC-based temporary access usually safer than storing long-lived AWS access keys as repository secrets?
+
+---
+
 ## 📖 Core Concepts
 
 ### GitHub Actions + EKS Flow
