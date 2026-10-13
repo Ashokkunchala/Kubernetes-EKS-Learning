@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning | Why it matters |
+|---|---|---|
+| **ALB (Application Load Balancer)** | An AWS load balancer that routes HTTP/HTTPS requests using rules such as hostnames and paths. | It provides an entry point and spreads requests across healthy targets. |
+| **Ingress** | A Kubernetes object describing HTTP/HTTPS routing rules. | It expresses desired routing, but does not implement it alone. |
+| **Ingress controller** | A controller that watches Ingress objects and configures a real data plane/load balancer. | Without a compatible controller, Ingress rules may do nothing. |
+| **Target group** | An AWS grouping of registered destinations that receive load-balanced traffic. | Health checks and target registration determine whether requests can reach Pods. |
+| **Health check** | A repeated test used to decide whether a target is ready to receive traffic. | A path, port, or expected status mismatch can make a healthy app appear unhealthy. |
+| **TLS certificate** | A certificate used to authenticate a server and enable encrypted HTTPS connections. | HTTPS needs correct certificate, hostname, and listener configuration. |
+
+**Analogy:** Ingress is the routing plan, the controller is the engineer implementing it, and the ALB is the traffic dispatcher.
+
+**Try / observe:** `kubectl get ingress,svc,endpointslices -A`; inspect the AWS load balancer, listener, target group, and health-check reason before changing manifests.
+
+**Troubleshooting clue:** If an ALB target is unhealthy, compare the health-check path/port and expected response with the application's actual response and the security-group path.
+
+**Explain it back:** What is the difference between an Ingress and an Ingress controller? Why can a target be registered but unhealthy?
+
+---
+
 ## 📖 Core Concepts
 
 ### AWS Load Balancer Controller
