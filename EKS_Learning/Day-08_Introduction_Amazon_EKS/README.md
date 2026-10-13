@@ -117,7 +117,7 @@ By the end of today, you will understand:
 │  │  │  ✅ AWS IAM integration                  │   │   │
 │  │  │  ✅ Compliance (SOC, PCI, HIPAA)         │   │   │
 │  │  │  ✅ AWS support                           │   │   │
-│  │  │  ❌ Cost ($73/month control plane)       │   │   │
+│  │  │  ❌ Per-cluster hourly fee applies        │   │   │
 │  │  │  ❌ Less control over control plane      │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
@@ -148,8 +148,9 @@ By the end of today, you will understand:
 │  ┌─────────────────────────────────────────────────┐   │
 │  │  Control Plane                                   │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
-│  │  │  $0.10/hour per cluster                  │   │   │
-│  │  │  = $73/month per cluster                 │   │   │
+│  │  │  Standard support: $0.10/cluster-hour    │   │   │
+│  │  │  Extended support: $0.60/cluster-hour    │   │   │
+│  │  │  Verify current AWS pricing and version   │   │   │
 │  │  │                                          │   │   │
 │  │  │  Includes:                               │   │   │
 │  │  │  • API Server                            │   │   │
@@ -166,19 +167,19 @@ By the end of today, you will understand:
 │  │  │  (Pay for what you use)                  │   │   │
 │  │  │                                          │   │   │
 │  │  │  Example:                                │   │   │
-│  │  │  • m5.large: $0.096/hour = $70/month    │   │   │
-│  │  │  • 3 nodes = $210/month                 │   │   │
+│  │  │  • EC2 costs vary by Region and pricing  │   │   │
+│  │  │  • Add storage, IP, data transfer, etc.  │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
 │  │  Total Monthly Cost (Example)                    │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
-│  │  │  Control Plane:  $73                    │   │   │
-│  │  │  Worker Nodes:  $210 (3x m5.large)     │   │   │
-│  │  │  Data Transfer: $50 (estimate)          │   │   │
+│  │  │  Control plane: check current EKS rate   │   │   │
+│  │  │  Worker nodes: use EC2 pricing calculator│  │   │
+│  │  │  Storage/network: estimate separately    │   │   │
 │  │  │  ─────────────────────                  │   │   │
-│  │  │  Total: ~$333/month                     │   │   │
+│  │  │  Total: estimate for your Region/setup   │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -270,23 +271,23 @@ By the end of today, you will understand:
 
 | Company | Use Case | Scale |
 |---------|----------|-------|
-| **Netflix** | Streaming infrastructure | Millions of pods |
-| **Samsung** | IoT workloads | Global scale |
-| **Expedia** | Travel platform | High availability |
-| **GoDaddy** | Domain management | Enterprise scale |
-| **Verizon** | 5G infrastructure | Low latency |
+| **Web applications** | Deploy and scale API/web workloads | Multiple replicas and health checks |
+| **Batch processing** | Run scheduled or queued jobs | Job/CronJob workloads |
+| **Microservices** | Deploy independently versioned services | Service discovery and controlled rollouts |
+| **Data processing** | Run data workers and pipelines | Workload-specific compute and storage |
+| **Platform engineering** | Provide a shared container platform | RBAC, namespaces, observability, policy |
 
 ### Real-World Scenario
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              NETFLIX - EKS USE CASE                      │
+│             EXAMPLE EKS APPLICATION                       │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
 │  │  Challenge:                                      │   │
-│  │  • Millions of concurrent users                  │   │
-│  │  • Global content delivery                       │   │
-│  │  • Zero downtime deployments                     │   │
+│  │  • Variable traffic and request volume           │   │
+│  │  • Reliable access to app dependencies           │   │
+│  │  • Gradual releases with health verification     │   │
 │  │  • Cost optimization                             │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -351,7 +352,7 @@ eksctl version
 
 ```bash
 # Windows
-curl.exe -LO "https://dl.k8s.io/release/v1.28.0/bin/windows/amd64/kubectl.exe"
+curl.exe -LO "https://dl.k8s.io/release/$(curl.exe -L -s https://dl.k8s.io/release/stable.txt)/bin/windows/amd64/kubectl.exe"
 
 # Or use Chocolatey
 choco install kubernetes-cli
@@ -396,7 +397,7 @@ kubectl version --client
    - **Answer:** EKS manages the control plane (API server, etcd, scheduler), provides automatic updates, high availability, and AWS integration. Self-managed requires you to manage everything.
 
 3. **What is the cost structure of EKS?**
-   - **Answer:** EKS charges $0.10/hour for the control plane ($73/month). Worker nodes are billed as EC2 instances. Data transfer charges apply.
+   - **Answer:** EKS has a per-cluster hourly fee that depends on Kubernetes version support tier (standard or extended). Worker compute, storage, IP addresses, and data transfer are charged separately. Check the [official EKS pricing page](https://aws.amazon.com/eks/pricing/) before estimating costs.
 
 4. **What are the benefits of using EKS?**
    - **Answer:** Managed control plane, high availability, AWS IAM integration, compliance certifications, automatic updates, and AWS support.
@@ -407,7 +408,7 @@ kubectl version --client
 ### Intermediate Level
 
 6. **How does EKS handle high availability?**
-   - **Answer:** EKS runs the control plane across multiple Availability Zones. It automatically handles failover and provides a 99.95% SLA.
+   - **Answer:** EKS operates a highly available managed control plane across multiple Availability Zones. Review the current [EKS Service Level Agreement](https://aws.amazon.com/eks/sla/) for the precise commitment and conditions. Application availability still depends on workload replicas, node capacity, networking, and dependencies.
 
 7. **What is the difference between Managed and Self-Managed Node Groups?**
    - **Answer:** Managed Node Groups are managed by AWS (automatic updates, scaling). Self-Managed gives you more control but requires manual management.
