@@ -115,7 +115,7 @@ By the end of today, you will understand:
 │  │  │    my-regcred \                          │   │   │
 │  │  │    --docker-server=registry.gitlab.com \ │   │   │
 │  │  │    --docker-username=user \              │   │   │
-│  │  │    --docker-password=pass                │   │   │
+│  │  │    --docker-password=<token-placeholder>  │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -152,9 +152,10 @@ kind: Secret
 metadata:
   name: database-secrets
 type: Opaque
-data:
-  DB_USERNAME: YWRtaW4=  # base64('admin')
-  DB_PASSWORD: c3VwZXJzZWNyZXQ=  # base64('supersecret')
+# stringData accepts plain strings; replace placeholders with lab-only values.
+stringData:
+  DB_USERNAME: REPLACE_WITH_LAB_USERNAME
+  DB_PASSWORD: REPLACE_WITH_LAB_PASSWORD
 ---
 # database-deployment.yaml
 apiVersion: apps/v1
@@ -395,9 +396,9 @@ kind: Secret
 metadata:
   name: db-credentials
 type: Opaque
-data:
-  username: YWRtaW4=
-  password: c3VwZXJzZWNyZXQ=
+stringData:
+  username: REPLACE_WITH_LAB_USERNAME
+  password: REPLACE_WITH_LAB_PASSWORD
 ---
 apiVersion: v1
 kind: Pod
