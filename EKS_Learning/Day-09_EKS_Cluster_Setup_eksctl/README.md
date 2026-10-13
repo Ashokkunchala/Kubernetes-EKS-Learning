@@ -360,7 +360,7 @@ sudo journalctl -u kubelet -f
    - **Answer:** Consider workload requirements (CPU, memory), cost, and scaling needs. t3.medium for general, m5.large for compute, r5.large for memory-intensive.
 
 4. **What is the difference between managed and self-managed node groups?**
-   - **Answer:** Managed Node Groups are managed by AWS (automatic updates, scaling). Self-Managed gives you more control but requires manual management.
+   - **Answer:** AWS manages the managed node group service and several lifecycle operations, but version/AMI updates still require a planned rollout or configured update process. Self-managed nodes require more direct operational work.
 
 5. **How do you scale an EKS cluster?**
    - **Answer:** Use Cluster Autoscaler for automatic scaling based on pod requirements, or manually update node group size with eksctl.
