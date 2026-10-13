@@ -428,10 +428,12 @@ kubectl exec -it configmap-pod -- env | grep DATABASE
 ### Exercise 2: Create and Use Secret
 
 ```bash
-# Create a lab-only Secret; set DB_PASSWORD in your shell first.
+# Prompt for a lab-only password without echoing it.
+read -s -p "Lab-only DB password: " DB_PASSWORD; echo
 kubectl create secret generic db-secrets \
   --from-literal=USERNAME=admin \
   --from-literal=PASSWORD="$DB_PASSWORD"
+unset DB_PASSWORD
 
 # Verify metadata and key names without exposing values.
 kubectl describe secret db-secrets
