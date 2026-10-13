@@ -10,6 +10,30 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Meaning in everyday language | Why it matters |
+|---|---|---|
+| **Pod** | The smallest unit Kubernetes schedules; it wraps one or more closely related containers. | Containers in a Pod share its network identity and can share mounted volumes. |
+| **Replica** | One running copy of an application workload. | Multiple copies can handle traffic and provide resilience. |
+| **ReplicaSet** | A controller that keeps the requested number of matching Pods alive. | If a Pod disappears, it creates a replacement. |
+| **Deployment** | The higher-level object used to manage stateless app releases and ReplicaSets. | It supports controlled updates and rollbacks. |
+| **Label / selector** | A label is metadata; a selector chooses objects with matching labels. | Controllers and Services use selectors to find the right Pods. |
+| **Declarative** | You describe the result you want; Kubernetes works out the steps. | A YAML manifest can be reviewed, versioned, and reapplied. |
+| **Rolling update** | Replacing old app Pods gradually with new ones. | It can reduce downtime, but bad readiness settings can still disrupt users. |
+
+**Analogy:** A Deployment is the team manager, a ReplicaSet maintains the number of players, and Pods are the individual players.
+
+**EKS connection:** These are Kubernetes objects, so their behavior is mostly the same on EKS and on a local cluster.
+
+**Try / observe:** `kubectl get deploy,rs,pods`, `kubectl describe deployment <name>`, `kubectl rollout status deployment/<name>`, `kubectl rollout history deployment/<name>`.
+
+**Troubleshooting clue:** If a Deployment has fewer ready replicas than desired, compare `kubectl get pods` with `kubectl describe pod <pod-name>`; inspect Events and container logs with `kubectl logs <pod-name>`.
+
+**Explain it back:** Why should you normally create a Deployment instead of a standalone Pod? What does a selector connect?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is a Pod?
