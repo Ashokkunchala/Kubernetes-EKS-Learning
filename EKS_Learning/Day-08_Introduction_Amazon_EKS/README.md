@@ -215,7 +215,7 @@ By the end of today, you will understand:
 │  │  │  • Scheduler (managed)                  │   │   │
 │  │  │  • Controller Manager (managed)         │   │   │
 │  │  │  • Automatic backups                    │   │   │
-│  │  │  • Automatic updates                    │   │   │
+│  │  │  • Customer-planned version upgrades     │   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -232,7 +232,7 @@ By the end of today, you will understand:
 │  │  1. Managed Node Groups                          │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
 │  │  │  • AWS manages the nodes                │   │   │
-│  │  │  • Automatic updates                    │   │   │
+│  │  │  • Planned node/AMI update rollouts      │   │   │
 │  │  │  • Auto Scaling                         │   │   │
 │  │  │  • Spot or On-Demand instances          │   │   │
 │  │  │  • Recommended for most use cases       │   │   │
