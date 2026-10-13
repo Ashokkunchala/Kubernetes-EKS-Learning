@@ -221,10 +221,13 @@ notifications: Slack / SNS / PagerDuty
 Add deploy events to a "Time series" panel so dashboards show releases:
 
 ```bash
-# Enable annotations for deployments, or use a webhook
-curl -X POST -H "Content-Type: application/json" \
+# Enable annotations for deployments, or use a webhook (local lab only).
+# Set GRAFANA_ADMIN_PASSWORD securely in your shell before running this request.
+curl --user "admin:${GRAFANA_ADMIN_PASSWORD}" \
+  -X POST -H "Content-Type: application/json" \
   -d '{"text":"deployed v1.2.3"}' \
-  http://admin:ChangeMe!@localhost:3000/api/annotations?time=... 
+  "http://localhost:3000/api/annotations?time=..."
+unset GRAFANA_ADMIN_PASSWORD 
 ```
 
 ---
