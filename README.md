@@ -19,6 +19,7 @@
 | [`GLOSSARY.md`](GLOSSARY.md) | A-to-Z dictionary of every EKS & Kubernetes term |
 | [`KUBERNETES_EKS_CONCEPTS_PLAIN_ENGLISH.md`](KUBERNETES_EKS_CONCEPTS_PLAIN_ENGLISH.md) | Beginner-friendly explanations, AuthN vs AuthZ, EKS identity, comparisons, troubleshooting terms and quizzes |
 | [`UNDERSTANDING_FIRST_STUDY_WORKFLOW.md`](UNDERSTANDING_FIRST_STUDY_WORKFLOW.md) | Flexible daily routine, one-week orientation path, checkpoints and safe lab practices |
+| [`TECHNICAL_VALIDATION_NOTES.md`](TECHNICAL_VALIDATION_NOTES.md) | Static review scope, high-impact corrections, safe-use checklist, and remaining runtime validation work |
 | [`ARCHITECTURE_PATTERNS.md`](ARCHITECTURE_PATTERNS.md) | 9 production design patterns + a decision tree |
 | [`TROUBLESHOOTING_PLAYBOOK.md`](TROUBLESHOOTING_PLAYBOOK.md) | 10 incident runbooks + universal triage commands |
 | [`EKS_Learning/Day-60_.../README.md`](EKS_Learning/Day-60_Final_Review_Certification_Preparation/README.md) | Final review = **Days 16–60** blueprint + certification prep |
