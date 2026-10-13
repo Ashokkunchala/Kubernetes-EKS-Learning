@@ -63,8 +63,9 @@ By the end of today, you will:
 ```bash
 # 1. Understand current spend
 aws ce get-cost-and-usage \
-  --time-period Start=2026-08-01,End=2026-09-01 \
-  --granularity MONTHLY \
+  --time-period Start=<YYYY-MM-DD>,End=<YYYY-MM-DD> \
+  --granularity MONTHLY
+# Replace both dates with the reporting period; End is exclusive. \
   --metrics "UnblendedCost" \
   --group-by Type=DIMENSION,Key=SERVICE
 
@@ -84,14 +85,17 @@ helm install kubecost kubecost/cost-analyzer --namespace kubecost
 
 ```yaml
 # Karpenter NodePool: mixed spot+on-demand across families, consolidated
-apiVersion: karpenter.sh/v1beta1
+apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: cost-optimized
 spec:
   template:
     spec:
-      nodeClassRef: { name: default }
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: default
       requirements:
       - key: karpenter.sh/capacity-type
         operator: In
