@@ -10,6 +10,27 @@ By the end of today, you will understand:
 
 ---
 
+## 🧠 Plain-English terms before you start
+
+| Term | Plain-English meaning |
+|---|---|
+| **Amazon FSx for Lustre** | Managed high-performance parallel filesystem often used for compute-heavy data workloads. |
+| **Amazon S3** | Object storage addressed by bucket and key, not a traditional mounted filesystem by default. |
+| **Object storage** | Stores whole objects plus metadata under keys; it differs from block and shared-file storage. |
+| **CSI driver** | A Kubernetes plugin for provisioning/attaching/mounting supported storage. |
+| **Throughput** | How much data can be transferred per unit of time. |
+| **Data repository association** | An FSx for Lustre feature that links filesystem data with an S3 data repository. |
+
+**Analogy:** EBS is a disk, EFS is a shared filing cabinet, FSx for Lustre is a high-speed shared workspace, and S3 is a durable object warehouse.
+
+**Try / observe:** Before applying manifests, confirm the driver is installed, the storage resource exists, and the chosen service matches the workload's access and performance needs.
+
+**Troubleshooting clue:** Distinguish provisioning failures from mount/connectivity failures and from slow application I/O; each requires different evidence.
+
+**Explain it back:** Why is S3 not identical to a POSIX filesystem? What workload might benefit from parallel filesystem throughput?
+
+---
+
 ## 📖 Core Concepts
 
 ### What is FSx for Lustre?
